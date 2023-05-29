@@ -235,6 +235,13 @@ function procLobbies(_readStatus, _snapshot, _data, _error) {
 
 //note all _data was _save
 
+//back to landing page button
+function goBackLandingBtn() {
+  console.log("b_goBackLandingBtn");
+  window.location.href="lp_landingPage.html";
+}
+
+
 /*----------------------------------------------------*/
 // END OF CODE
 /*----------------------------------------------------*/

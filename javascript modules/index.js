@@ -17,9 +17,9 @@ function ind_home() {
   window.location.href = "index.html"
 
 }
-
-function ind_admin(){
-  window.location.href="ad_adminPage.html"
+// test admin button on index page 
+function ind_admin() {
+  window.location.href = "ad_adminPage.html"
 }
 
 

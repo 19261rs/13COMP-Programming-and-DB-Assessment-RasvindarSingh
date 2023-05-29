@@ -70,14 +70,14 @@ function fb_login() {
       userDetails.age = user.age;
       loginStatus = 'logged in';
 
-      fb_readRec(DETAILS, userDetails.uid, userDetails, fb_processRec);
-
-
-      //session storage, taking info from the login of user to take to next page
+       //session storage, taking info from the login of user to take to next page
       sessionStorage.setItem("user.uid", user.uid);
       sessionStorage.setItem("user.email", user.email);
       sessionStorage.setItem("user.name", user.displayName);
       sessionStorage.setItem("user.photoURL", user.photoURL);
+      fb_readRec(DETAILS, userDetails.uid, userDetails, fb_processRec);
+
+
 
       document.getElementById("loginStatus").innerHTML = "Login Status: " + loginStatus
       console.log('fb_login: status = ' + loginStatus);
