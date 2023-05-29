@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>lobby ras</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="13COMP firebase">
+  <meta name="author" content="?????">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/assets/images/dtec_favicon.PNG">
+  
+  <!-- stylesheets *******************************************-->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="style.css">
+ 
+  <!-- P5.js & P5.play ***************************************-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js"></script> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+  <script src="https://p5play.org/v3/planck.min.js"></script>
+  <script src="https://p5play.org/v3/p5.play.js"></script>
+  
+  <!-- firebase start ****************************************-->
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+  <!-- Firebase App (core Firebase SDK) always required & must be listed 1st -->
+  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>  
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>  
+  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script> 
+  <!-- firebase end ******************************************-->
+  
+  <!-- JQUERY ************************************************-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  
+  
+  <!-- Your modules ******************************************-->
+  <script defer src="/javascript modules/html_buildLobby.js"></script>
+   <script  defer src="/javascript modules/index.js"></script>
+   <script defer src="/javascript modules/fb_io.js"></script>
+  
+  <script defer src="/javascript modules/test_call.js"></script>
+   <script defer src="/javascript modules/reg_manager.js"></script>
+    <script defer src="/javascript modules/ad_manager.js"></script>
+  <script  defer src="/javascript modules/buttons.js"></script>
+    <script  defer src="/javascript modules/html_manager.js"></script>
+
+  <script defer src = "/javascript modules/lg_managerV2.js"></script>
+  
+</head>
+
+<!--*****************************************************
+//  BODY
+******************************************************-->
+<body class="w3-container w3-yellow" onload="html_load(), html_getData()">
+  <section id="s_table" class="w3-grey">
+
+      <p id="p_debug"></p>
+  <button onClick = "ind_home()" type="button">Click Me to go home!</button>
+
+     <!-- session storage test button -->
+   <button onClick = "sessionData()" type="button">Click Me to check session storage</button>
+    <header>
+      <!--ROW 1 ++++++++++++++++++++++++++++++++++++++-->
+      <div class="w3-row-padding w3-margin-top w3-blue">
+        <div class="w3-col s4 m4 l4">
+          <h1> GN Lobby Page</h1>
+        </div>
+        
+        
+      </div>
+
+      <!--ROW 2 ++++++++++++++++++++++++++++++++++++++-->
+      <div class="w3-row-padding w3-margin-top">
+        <div class='w3-col s12 m6 l4'>
+          <button id='b_getData' class='b_options 
+            w3-button  w3-xlarge w3-disabled w3-border w3-brown'
+            style='width: 100%;'
+            onclick="html_getData()">get data</button>
+        </div>
+        
+              <div class='w3-col s12 m6 l4'>
+          <button id='b_writeData' class='b_options 
+            w3-button  w3-xlarge w3-border w3-brown'
+            style='width: 100%;'
+            onclick=" html_setLobbyData(), html_getLobbyData()">write data</button>
+        </div>
+        
+        <div class='w3-col s12 m6 l4'>
+          <button class='b_part2
+            w3-button  w3-xlarge w3-border w3-brown'
+            style='width: 100%;'
+            onclick="html_reset()">reset</button>
+        </div>
+      </div>
+    </header>
+    
+    <main>
+      <table class="w3-table-all w3-border w3-hoverable w3-margin-top">
+        <tr class="w3-light-grey">
+          <th>name</th>
+          <th class="w3-center">wins</th>
+          <!-- <th class="w3-center">draws</th> -->
+          <th class="w3-center">losses</th>
+          <th>uid</th>
+          <th>Join</th>
+        </tr>
+        <tbody id="tb_lobby">
+        </tbody>
+      </table>
+    </main>
+      <p><button id="b_backButtonGame" class="w3-button w3-border w3-small w3-red" onclick="goBackLandingBtn()">BACK
+            TO LANDING PAGE</button></
+
+
+  </section>
+  
+</body>
+</html>
+
+<!--*****************************************************
+//  END OF HTML
+******************************************************-->
