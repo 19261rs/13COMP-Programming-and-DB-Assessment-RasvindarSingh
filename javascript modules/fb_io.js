@@ -247,6 +247,28 @@ function fb_readAll(_path, _data, _processAll) {
     _processAll(_data, snapshot, dbKeys);
   }
 }
+
+/**************************************************************/
+// fb_readOn(_path, _data)
+// Read all DB records for the path
+// Input:  path to read from and where to save it
+// Return:
+/**************************************************************/
+function fb_readOn(_path, _key, _data) {
+  console.log('fb_readAll: path= ' + _path);
+
+  readStatus = "waiting";
+  firebase.database().ref(_path + "/" + _key + "/" + _data).on("value", readOnLog, readOnErr);
+
+function readOnLog() {
+  console.log(_data + " has been changed - Function readOnLog" );
+}
+  function readOnErr(error) {
+    readStatus = "fail";
+    console.log(error);
+  //  _processAll(_data, snapshot, dbKeys);
+  }
+}
 /**************************************************************/
 // fb_readRec(_path, _key, _data)
 // Read a specific DB record

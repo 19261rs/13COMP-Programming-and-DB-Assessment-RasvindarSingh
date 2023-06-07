@@ -18,6 +18,12 @@ function gs_goBackLandingBtn() {
   window.location.href="lp_landingPage.html";
 }
 
+//function reading players join status 
+function gs_readOnOne (){
+  console.log("gs_readOnOne running");
+  fb_readOn(LOBBYDATA, sessionStorage.getItem("user.uid"), "join");
+}
+
 
 
 
