@@ -192,6 +192,7 @@ function html_p2Update() {
     p2gameName: sessionStorage.getItem("p2.gameName"),
     p2Wins: 0,
     p2Losses:0,
+    turn:0,
     randomNum: sessionStorage.getItem("gs_gameNum")
 
   
