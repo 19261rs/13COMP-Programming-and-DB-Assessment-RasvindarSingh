@@ -58,10 +58,7 @@ function fb_login() {
 
   function newLogin(user) {
     if (user) {
-
-
       // user is signed in, so save Google login details
-
       userDetails.uid = user.uid;
       userDetails.email = user.email;
       userDetails.name = user.displayName;
@@ -70,7 +67,7 @@ function fb_login() {
       userDetails.age = user.age;
       loginStatus = 'logged in';
 
-       //session storage, taking info from the login of user to take to next page
+      //session storage, taking info from the login of user to take to next page
       sessionStorage.setItem("user.uid", user.uid);
       sessionStorage.setItem("user.email", user.email);
       sessionStorage.setItem("user.name", user.displayName);
@@ -260,13 +257,13 @@ function fb_readOn(_path, _key, _data) {
   readStatus = "waiting";
   firebase.database().ref(_path + "/" + _key + "/" + _data).on("value", readOnLog, readOnErr);
 
-function readOnLog() {
-  console.log(_data + " has been changed - Function readOnLog" );
-}
+  function readOnLog() {
+    console.log(_data + " has been changed - Function readOnLog");
+  }
   function readOnErr(error) {
     readStatus = "fail";
     console.log(error);
-  //  _processAll(_data, snapshot, dbKeys);
+    //  _processAll(_data, snapshot, dbKeys);
   }
 }
 /**************************************************************/

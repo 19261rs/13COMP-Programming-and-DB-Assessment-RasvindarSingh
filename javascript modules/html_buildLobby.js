@@ -130,7 +130,9 @@ function html_buildTableFunc(_tableBodyID, _array) {
       var col3 = currentRow.find("td:eq(3)").text();
       console.log("html_buildTableFunc: uid = " + col3);
       sessionStorage.setItem("host.uid", col3);
+      
      console.log( sessionStorage.getItem("host.uid"));
+      html_p2Update();
     });
   });
 }
@@ -241,6 +243,10 @@ function goBackLandingBtn() {
   window.location.href="lp_landingPage.html";
 }
 
+function html_getHostUid() {
+        sessionStorage.setItem("host.uid", userDetails.uid);
+
+}
 
 /*----------------------------------------------------*/
 // END OF CODE

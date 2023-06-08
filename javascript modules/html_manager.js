@@ -38,3 +38,8 @@ function html_admin() {
 
   }
 }
+
+function gp_lobbytoGameHost() {
+gs_readOnOne();
+  window.location.href = "gp_gamePage.html"
+}

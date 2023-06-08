@@ -8,7 +8,7 @@ function gs_randomNumberGen(){
   gs_randomGameNum = Math.floor(Math.random()*3);
   console.log(gs_randomGameNum);
   sessionStorage.setItem("gs_gameNum", gs_randomGameNum);
-  html_p2Update();
+
   
 }
 
@@ -21,8 +21,10 @@ function gs_goBackLandingBtn() {
 //function reading players join status 
 function gs_readOnOne (){
   console.log("gs_readOnOne running");
-  fb_readOn(LOBBYDATA, sessionStorage.getItem("user.uid"), "join");
+  fb_readOn(LOBBYDATA, sessionStorage.getItem("host.uid"), "join");
 }
+
+
 
 
 
