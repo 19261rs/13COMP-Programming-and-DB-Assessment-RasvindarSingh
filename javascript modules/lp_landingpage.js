@@ -19,5 +19,9 @@ function lp_enterBtnClick() {
 // INSTRUCTIONS BUTTON FUNCTION ON CLICK
 function lp_instructionBtnClick() {
   console.log("instructionBtnClick")
-  document.getElementById("b_instructions").innerHTML = "INSTRUCTIONS: \p Guess The Number: Try to guess Player 2's number. Player 2 will also have to guess your number. ";
+  document.getElementById("b_instructions").innerHTML = "INSTRUCTIONS: Guess The Number: The computer has generated a random number, and it is up to you and one other player to compete head to head and figure out what that number is! When its your turn input what you reckon the number is. You will only have 20 seconds per turn and a limited number of guesses.  ";
 };
+
+function lp_toLeaderboardPage() {
+  window.location.href="lb_leaderboardPage.html"
+}

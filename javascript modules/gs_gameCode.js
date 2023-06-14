@@ -34,10 +34,20 @@ function gs_switchTurns() {
   fb_lobbyUpdate(LOBBYDATA, sessionStorage.getItem("host.uid"), lobbyData);
 }
 
-//checking which players turn it is
-function readOnTurn() {
+// //checking which players turn it is
+// function readOnTurn() {
+//  console.log('fb_readAll: path= ' + _path);
 
-}
+//   readStatus = "waiting";
+//   firebase.database().ref(_path + "/" + _key + "/" + _data).on("value", readOnTurnLog, readOnTurnErr);
+
+//   function readOnTurnLog() {
+//     console.log(_data + " has been changed - Function readOnLog");
+//   }
+//   function readOnTurnErr(error) {
+//     readStatus = "fail";
+//     console.log(error);
+// }
 
 
 
