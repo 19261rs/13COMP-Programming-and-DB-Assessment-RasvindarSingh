@@ -36,9 +36,7 @@
   <!-- Your modules ******************************************-->
    <script defer src="/javascript modules/index.js"></script>
   <script defer src="/javascript modules/fb_io.js"></script>
-  <script defer src="/javascript modules/test_call.js"></script>
   <script defer src="/javascript modules/html_manager.js"></script>
-  <script defer src="/javascript modules/lg_managerV2.js"></script>
    <script defer src="/javascript modules/lb_leaderboard.js"></script>
 
 </head>
@@ -46,19 +44,22 @@
 
 <body onload = "html_load()">
 <section id = "t_lbLeadboard">
-  <table class = "w3-table  w3-boarderd  w3-grey"
+  <table class = "w3-table w3-bordered w3-margin-top"
     id = "leaderboard"></table>
   
 
   <div id ="lb_container" class="w3-center-w3-display-bottommiddle">
     <!-- <button onclick = id="b_lbBackToLanding"> Back to Landing Page</button>  -->
-    <button class = "w3-button w3-green" onclick = lb_getLeaderboard() class="b_lbButton"> Get leaderboard</button>
+    <button class = "w3-button w3-green" onclick = lb_getLeaderboard() class="b_lbButton"> Retrieve leaderboard for Guess The Number Game</button>
+
+    <button class = "w3-button w3-green w3-margin-top" onclick = > Retrieve leaderboard for Tic Tac Toe Game (WIP)</button>
+
   </div>
 </section>
-  <br>
+  
 
    <!--Back to Landing Button-->
-        <button class="w3-button w3-green" onclick=lb_backToLanding()>Back to landing page</button>
+        <button class="w3-button w3-green w3-margin-top" onclick=lb_backToLanding()>Back to landing page</button>
 
 </body>
 </html>

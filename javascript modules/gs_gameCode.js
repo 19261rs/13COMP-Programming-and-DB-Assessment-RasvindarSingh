@@ -9,7 +9,10 @@ function gs_randomNumberGen() {
   gs_randomGameNum = Math.floor(Math.random() * 3);
   console.log(gs_randomGameNum);
   sessionStorage.setItem("gs_gameNum", gs_randomGameNum);
-
+  lobbyData = {
+    ranNum: gs_randomGameNum
+  }
+  fb_lobbyUpdate(LOBBYDATA, sessionStorage.getItem("host.uid"), lobbyData );
 }
 
 //back to landing page button

@@ -1,5 +1,5 @@
 
-// leaderbord code --> retrieves score data from fb and sorts out in order from highest to lowest
+// leaderbord function --> retrieves score data from fb scores path and sorts out in order from highest to lowest 
 function lb_getLeaderboard(){
   const lb_leaderboard = document.getElementById("leaderboard");
   lb_leaderboard.innerHTML = "";
@@ -9,9 +9,9 @@ function lb_getLeaderboard(){
   const lb_gameNameTitle =  document.createElement('th');
   const lb_winsTitle =  document.createElement('th');
 
-  lb_placementTitle.textContent = "placement"
-  lb_gameNameTitle.textContent = "game name";
-  lb_winsTitle.textContent = "wins";
+  lb_placementTitle.textContent = "Placement"
+  lb_gameNameTitle.textContent = "Username";
+  lb_winsTitle.textContent = "Wins";
 
   lb_headingsRow.appendChild(lb_placementTitle);
   lb_headingsRow.appendChild(lb_gameNameTitle);
@@ -47,6 +47,7 @@ function lb_getLeaderboard(){
   
 }
 
+// function to go back to landing page on leaderboard page html
 function lb_backToLanding() {
   window.location.href="lp_landingPage.html"
 }
