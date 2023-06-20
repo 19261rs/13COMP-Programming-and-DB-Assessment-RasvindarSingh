@@ -25,7 +25,7 @@ console.log("-----------------------------------");
 var html_sortKey = '';
 var lobbyArray = [];
 var html_hostUid = "";
-
+var myPlayerNum;
 /*----------------------------------------------------*/
 // html_getData()
 // Called by html GET DATA button
@@ -38,8 +38,6 @@ function html_getData() {
 
   fb_readAll(LOBBYDATA, lobbyArray, procLobbies);
 }
-
-
 
 /*----------------------------------------------------*/
 // html_build()
@@ -130,8 +128,11 @@ function html_buildTableFunc(_tableBodyID, _array) {
       var col3 = currentRow.find("td:eq(3)").text();
       console.log("html_buildTableFunc: uid = " + col3);
       sessionStorage.setItem("host.uid", col3);
+
+      console.log(sessionStorage.getItem("host.uid"));
+      myPlayerNum = 1;
+      sessionStorage.setItem('myPlayerNum', myPlayerNum);
       
-     console.log( sessionStorage.getItem("host.uid"));
       html_p2Update();
     });
   });
@@ -156,12 +157,13 @@ function html_getLobbyData() {
     p1gameName: sessionStorage.getItem("user.name"),
     p1Wins: 0,
     p1Losses: 0,
+    p1RecentGuess: 0,
     join: 0,
     // p2Uid: ,
     // p2gameName: ,
     // p2Wins: 0,
     // p2Losses:0 ,
-    
+
   }
   console.table(lobbyData);
   fb_writeRec(LOBBYDATA, sessionStorage.getItem("user.uid"), lobbyData);
@@ -170,41 +172,36 @@ function html_getLobbyData() {
 
 //p2 joins lobby
 function html_p2Join() {
-  
+
   sessionStorage.setItem("p2.uid", userDetails.uid),
     sessionStorage.setItem("p2.gameName", userDetails.name),
     console.log("this is player 2's gameName: " + sessionStorage.getItem("p2.gameName"));
   // sessionStorage.setItem("p2.wins", userDetails.wins),
   // sessionStorage.setItem("p2.losses", userDetails.losses),
-    sessionStorage.setItem("join", 1);
+  sessionStorage.setItem("join", 1);
 }
 
 function html_p2Update() {
   const LOBBYDATA = "lobbyData";
   lobbyData = {
 
- // p1Uid: sessionStorage.getItem("user.uid"),
-    // p1gameName: sessionStorage.getItem("user.name"),
-    // p1Wins: 0,
-    // p1Losses: 0,
     join: 1,
     p2Uid: sessionStorage.getItem("p2.uid"),
     p2gameName: sessionStorage.getItem("p2.gameName"),
     p2Wins: 0,
-    p2Losses:0,
-    turn:0,
+    p2Losses: 0,
+    p2RecentGuess: 0,
+    turn: 0,
     randomNum: sessionStorage.getItem("gs_gameNum")
 
-  
   }
-  // fb_lobbyUpdate(LOBBYDATA, sessionStorage.getItem("host.uid"), lobbyData);
-    // fb_lobbyUpdate(LOBBYDATA, userDetails.uid, lobbyData);
-     html_hostUid =  sessionStorage.getItem("host.uid");
-  console.log(html_hostUid);
-    fb_lobbyUpdate(LOBBYDATA, html_hostUid, lobbyData);
-
-
   
+  // fb_lobbyUpdate(LOBBYDATA, sessionStorage.getItem("host.uid"), lobbyData);
+  // fb_lobbyUpdate(LOBBYDATA, userDetails.uid, lobbyData);
+  html_hostUid = sessionStorage.getItem("host.uid");
+  console.log(html_hostUid);
+  fb_lobbyUpdate(LOBBYDATA, html_hostUid, lobbyData);
+
 }
 
 //lobby code: for future ref this use to be in test_call.js
@@ -236,17 +233,21 @@ function procLobbies(_readStatus, _snapshot, _data, _error) {
   //  }
 }
 
-//note all _data was _save
-
 //back to landing page button
 function goBackLandingBtn() {
   console.log("b_goBackLandingBtn");
-  window.location.href="lp_landingPage.html";
+  window.location.href = "lp_landingPage.html";
 }
 
 function html_getHostUid() {
-        sessionStorage.setItem("host.uid", userDetails.uid);
+  sessionStorage.setItem("host.uid", userDetails.uid);
 
+}
+
+//sets host to player 0
+function html_setNumForHost(){
+  myPlayerNum = 0;
+  sessionStorage.setItem('myPlayerNum', myPlayerNum);
 }
 
 /*----------------------------------------------------*/

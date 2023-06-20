@@ -17,6 +17,8 @@ var userDetails = {
 
 };
 
+var myPlayerNumSS = parseInt(sessionStorage.getItem('myPlayerNum'), 10);
+var fb_userTurn = 1; 
 /**************************************************************/
 // fb_initialise()
 // Called by setup   window.location.href = "lp_landingPage.html";
@@ -74,19 +76,8 @@ function fb_login() {
       sessionStorage.setItem("user.photoURL", user.photoURL);
       fb_readRec(DETAILS, userDetails.uid, userDetails, fb_processRec);
 
-
-
       document.getElementById("loginStatus").innerHTML = "Login Status: " + loginStatus
       console.log('fb_login: status = ' + loginStatus);
-
-      //switching page after registration
-      // window.location.href = "lp_landingPage.html";
-
-
-
-      //      document.getElementById("p_regName").innerHTML  = userDetails.name        //<=======    
-      // document.getElementById("p_regEmail").innerHTML = userDetails.email 
-
     }
     else {
       // user NOT logged in, so redirect to Google login
@@ -266,6 +257,47 @@ function fb_readOn(_path, _key, _data) {
     //  _processAll(_data, snapshot, dbKeys);
   }
 }
+
+/**************************************************************/
+// fb_readOn(_path, _data)
+// Read all DB records for the path
+// Input:  path to read from and where to save it
+// Return:
+/**************************************************************/
+function fb_readOnPlayerSwitch(_path, _key, _data) {
+  console.log('fb_readOnPlayerSwitch: path= ' + _path);
+
+  readStatus = "waiting";
+  firebase.database().ref(_path + "/" + _key + "/" + _data).on("value", processReadOnPlayerSwitch, readOnPlayerSwitchErr);
+
+  function processReadOnPlayerSwitch() {
+    console.log(_data + " has been changed - Function processReadOnPlayerSwitch");
+    fb_readPlayerSwitch();
+    if(myPlayerNumSS === fb_userTurn) {
+      i_inputBox.style.display = "block";
+    } else {
+            i_inputBox.style.display = "none";
+
+    }
+    
+  }
+  function readOnPlayerSwitchErr(error) {
+    readStatus = "fail";
+    console.log(error);
+    //  _processAll(_data, snapshot, dbKeys);
+  }
+}
+
+
+//reads turn
+function fb_readPlayerSwitch(){
+  firebase.database().ref(LOBBYDATA + '/' + sessionStorage.getItem('host.uid') + '/' + "turn").once("value", fb_processReadPlayerSwitch);
+  //tells what new turn is
+  function fb_processReadPlayerSwitch(snapshot) {
+    fb_userTurn = snapshot.val()
+    console.log('fb_readPlayerSwitch fb_userTurn =' + fb_userTurn);
+  }
+}
 /**************************************************************/
 // fb_readRec(_path, _key, _data)
 // Read a specific DB record
@@ -317,6 +349,8 @@ function readErr(error) {
   console.log(error);
 }
 //}
+
+
 
 //admin
 function fb_readRecAdmin(_path, _key, _data) {
@@ -424,6 +458,17 @@ function fb_processRec(_dbData, _data) {
   }
   console.log("finished processing data");
 }
+
+
+//the number getting guessed 
+
+function fb_targetNum(_path, _key, _data){
+  firebase.database().ref(_path + '/' + _key + '/' + _data).once("value", fb_processTargetNum);
+  function fb_processTargetNum(snapshot) {
+    targetNum = snapshot.val();
+  }
+}
+
 
 /**************************************************************/
 //    END OF MODULE

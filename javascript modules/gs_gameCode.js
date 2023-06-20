@@ -3,6 +3,9 @@ console.log('%c' + MODULENAME + ': ', 'color: blue;');
 
 var gs_randomGameNum;
 var playerTurn = 0;
+var guessedNumInput;
+var targetNum;
+ 
 
 // generating a random rumber and writing to open FB lobby feild 
 function gs_randomNumberGen() {
@@ -13,6 +16,12 @@ function gs_randomNumberGen() {
     ranNum: gs_randomGameNum
   }
   fb_lobbyUpdate(LOBBYDATA, sessionStorage.getItem("host.uid"), lobbyData );
+}
+
+// calling readOnPlayerSwitch on game screen
+function gs_readOnPlayerSwitch(){
+  fb_readOnPlayerSwitch(LOBBYDATA, sessionStorage.getItem('host.uid'), "turn");
+  console.log('issued fb_readOnPlayerSwitch');
 }
 
 //back to landing page button
@@ -33,31 +42,50 @@ function gs_switchTurns() {
   playerTurn = 1 - playerTurn;
   lobbyData = {
     turn: playerTurn
+    
   }
   fb_lobbyUpdate(LOBBYDATA, sessionStorage.getItem("host.uid"), lobbyData);
+  
 }
 
-// //checking which players turn it is
-// function readOnTurn() {
-//  console.log('fb_readAll: path= ' + _path);
 
-//   readStatus = "waiting";
-//   firebase.database().ref(_path + "/" + _key + "/" + _data).on("value", readOnTurnLog, readOnTurnErr);
+// submit button click on guess the num game
+function gs_guessNumSubmit() {
+  i_inputBox.style.display = 'none';
+  guessedNumInput =  gs_getGuessInput('form_guess', 0);
+  fb_targetNum(LOBBYDATA, sessionStorage.getItem('host.uid'), "ranNum");
+  if (guessedNumInput === targetNum){
+    alert("You Win");
+    console.log("You win");
+    
+  } else {
+      if (fb_userTurn == 0) {
+    fb_userTurn = 1;
+  lobbyData = {
+    turn: fb_userTurn,
+    p1RecentGuess:guessedNumInput
+  }
+  fb_lobbyUpdate(LOBBYDATA, sessionStorage.getItem('host.uid'), lobbyData);
+} else {
+  fb_userTurn = 0;
+  lobbyData = {
+     turn: fb_userTurn,
+    p2RecentGuess:guessedNumInput
+  }
+    fb_lobbyUpdate(LOBBYDATA, sessionStorage.getItem('host.uid'), lobbyData);
+}
+  }
 
-//   function readOnTurnLog() {
-//     console.log(_data + " has been changed - Function readOnLog");
-//   }
-//   function readOnTurnErr(error) {
-//     readStatus = "fail";
-//     console.log(error);
-// }
+}
 
 
+//getting guess form value from the input box 
+function gs_getGuessInput(_elementId, _item){
+  return document.getElementById(_elementId).elements.item(_item).value;
+  
+}
 
 
-
-// // Greeting the user with their personal name on landing page
-// document.getElementById('p_lpuserNameGreet').innerHTML = "Welcome, " + sessionStorage.getItem("user.name");
-
-
-// document.getElementById('i_lpuserPhotoURL').src = sessionStorage.getItem("user.photoURL");
+/**************************************************************/
+//    END OF MODULE
+/**************************************************************/

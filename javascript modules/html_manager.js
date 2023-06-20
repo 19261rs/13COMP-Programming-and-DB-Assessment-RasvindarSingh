@@ -39,7 +39,12 @@ function html_admin() {
   }
 }
 
+//button to go from lobby page to game page
 function gp_lobbytoGameHost() {
 gs_readOnOne();
   window.location.href = "gp_gamePage.html"
 }
+
+/**************************************************************/
+//    END OF MODULE
+/**************************************************************/
