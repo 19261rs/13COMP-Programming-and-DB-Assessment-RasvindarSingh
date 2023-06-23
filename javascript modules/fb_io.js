@@ -274,9 +274,15 @@ function fb_readOnPlayerSwitch(_path, _key, _data) {
     console.log(_data + " has been changed - Function processReadOnPlayerSwitch");
     fb_readPlayerSwitch();
     if(myPlayerNumSS === fb_userTurn) {
+      userStatus.innerHTML = "It is your turn. Submit a guess."
       i_inputBox.style.display = "block";
+      submit.style.display = "block"
     } else {
+      
             i_inputBox.style.display = "none";
+            submit.style.display = "none";
+            userStatus.innerHTML = "Waiting for other player..."
+    
 
     }
     
@@ -294,8 +300,14 @@ function fb_readPlayerSwitch(){
   firebase.database().ref(LOBBYDATA + '/' + sessionStorage.getItem('host.uid') + '/' + "turn").once("value", fb_processReadPlayerSwitch);
   //tells what new turn is
   function fb_processReadPlayerSwitch(snapshot) {
-    fb_userTurn = snapshot.val()
+    if (snapshot.val() == null){
+      //once record is deleted send back to landing page
+      window.location.href="lp_landingPage.html";
+    } else {
+      fb_userTurn = snapshot.val()
     console.log('fb_readPlayerSwitch fb_userTurn =' + fb_userTurn);
+    }
+    
   }
 }
 /**************************************************************/
@@ -469,6 +481,12 @@ function fb_targetNum(_path, _key, _data){
   }
 }
 
+//deleting fb record function
+function fb_delRec(_path, _key) {
+  console.log("fb_delRec");
+  firebase.database().ref(_path + '/' + _key).remove();
+  console.log("deleted record")
+}
 
 /**************************************************************/
 //    END OF MODULE

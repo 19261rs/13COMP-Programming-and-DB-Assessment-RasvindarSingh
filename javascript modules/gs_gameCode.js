@@ -5,7 +5,8 @@ var gs_randomGameNum;
 var playerTurn = 0;
 var guessedNumInput;
 var targetNum;
- 
+const SCORES = "Scores";
+
 
 // generating a random rumber and writing to open FB lobby feild 
 function gs_randomNumberGen() {
@@ -15,11 +16,11 @@ function gs_randomNumberGen() {
   lobbyData = {
     ranNum: gs_randomGameNum
   }
-  fb_lobbyUpdate(LOBBYDATA, sessionStorage.getItem("host.uid"), lobbyData );
+  fb_lobbyUpdate(LOBBYDATA, sessionStorage.getItem("host.uid"), lobbyData);
 }
 
 // calling readOnPlayerSwitch on game screen
-function gs_readOnPlayerSwitch(){
+function gs_readOnPlayerSwitch() {
   fb_readOnPlayerSwitch(LOBBYDATA, sessionStorage.getItem('host.uid'), "turn");
   console.log('issued fb_readOnPlayerSwitch');
 }
@@ -42,47 +43,68 @@ function gs_switchTurns() {
   playerTurn = 1 - playerTurn;
   lobbyData = {
     turn: playerTurn
-    
+
   }
   fb_lobbyUpdate(LOBBYDATA, sessionStorage.getItem("host.uid"), lobbyData);
-  
+
 }
 
 
 // submit button click on guess the num game
 function gs_guessNumSubmit() {
   i_inputBox.style.display = 'none';
-  guessedNumInput =  gs_getGuessInput('form_guess', 0);
+  guessedNumInput = gs_getGuessInput('form_guess', 0);
   fb_targetNum(LOBBYDATA, sessionStorage.getItem('host.uid'), "ranNum");
-  if (guessedNumInput === targetNum){
-    alert("You Win");
+
+  console.log("guessednuminput: " + guessedNumInput);
+  console.log("target num: " + targetNum);
+
+  if (guessedNumInput == targetNum) {
     console.log("You win");
-    
+    alert("You Win");
+    //updating scores
+
+    //player 1 wins - issue a read instead of 0
+    var userScore = 50 + 1;
+
+    Scores = {
+      score: userScore
+    };
+    //updates score and kicks them to landing page
+    fb_lobbyUpdate(SCORES, userDetails.uid, Scores);
+    //deleting record
+    fb_delRec(LOBBYDATA, sessionStorage.getItem("host.uid"));
+    //sending user home
+    window.location.href = "lp_landingPage.html";
+
+
   } else {
-      if (fb_userTurn == 0) {
-    fb_userTurn = 1;
-  lobbyData = {
-    turn: fb_userTurn,
-    p1RecentGuess:guessedNumInput
-  }
-  fb_lobbyUpdate(LOBBYDATA, sessionStorage.getItem('host.uid'), lobbyData);
-} else {
-  fb_userTurn = 0;
-  lobbyData = {
-     turn: fb_userTurn,
-    p2RecentGuess:guessedNumInput
-  }
-    fb_lobbyUpdate(LOBBYDATA, sessionStorage.getItem('host.uid'), lobbyData);
-}
+    //changing hosts guess and turn feild
+    if (fb_userTurn == 0) {
+      fb_userTurn = 1;
+      lobbyData = {
+        turn: fb_userTurn,
+        p1RecentGuess: guessedNumInput
+      }
+      fb_lobbyUpdate(LOBBYDATA, sessionStorage.getItem('host.uid'), lobbyData);
+    } else {
+      //changing player 2's guess and turn feild
+      fb_userTurn = 0;
+      lobbyData = {
+        turn: fb_userTurn,
+        p2RecentGuess: guessedNumInput
+      }
+      fb_lobbyUpdate(LOBBYDATA, sessionStorage.getItem('host.uid'), lobbyData);
+    }
   }
 
 }
 
 
 //getting guess form value from the input box 
-function gs_getGuessInput(_elementId, _item){
+function gs_getGuessInput(_elementId, _item) {
   return document.getElementById(_elementId).elements.item(_item).value;
-  
+
 }
 
 

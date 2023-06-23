@@ -159,6 +159,7 @@ function html_getLobbyData() {
     p1Losses: 0,
     p1RecentGuess: 0,
     join: 0,
+    turn: 1
     // p2Uid: ,
     // p2gameName: ,
     // p2Wins: 0,
@@ -192,7 +193,7 @@ function html_p2Update() {
     p2Losses: 0,
     p2RecentGuess: 0,
     turn: 0,
-    randomNum: sessionStorage.getItem("gs_gameNum")
+    // ranNum: parseInt(sessionStorage.getItem("gs_gameNum"), 10)
 
   }
   
