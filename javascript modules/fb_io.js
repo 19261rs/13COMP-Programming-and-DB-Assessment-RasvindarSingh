@@ -1,6 +1,6 @@
 /**************************************************************/
 // fb_io.js
-// Written by Mr. Gillies with edits done by Rasvindar   2021
+// Written by Mr. Gillies with edits done by Rasvindar   2023
 /**************************************************************/
 var admin = false;
 
@@ -18,7 +18,7 @@ var userDetails = {
 };
 
 var myPlayerNumSS = parseInt(sessionStorage.getItem('myPlayerNum'), 10);
-var fb_userTurn = 1; 
+var fb_userTurn = 1;
 /**************************************************************/
 // fb_initialise()
 // Called by setup   window.location.href = "lp_landingPage.html";
@@ -273,19 +273,19 @@ function fb_readOnPlayerSwitch(_path, _key, _data) {
   function processReadOnPlayerSwitch() {
     console.log(_data + " has been changed - Function processReadOnPlayerSwitch");
     fb_readPlayerSwitch();
-    if(myPlayerNumSS === fb_userTurn) {
+    if (myPlayerNumSS === fb_userTurn) {
       userStatus.innerHTML = "It is your turn. Submit a guess."
       i_inputBox.style.display = "block";
       submit.style.display = "block"
     } else {
-      
-            i_inputBox.style.display = "none";
-            submit.style.display = "none";
-            userStatus.innerHTML = "Waiting for other player..."
-    
+
+      i_inputBox.style.display = "none";
+      submit.style.display = "none";
+      userStatus.innerHTML = "Waiting for other player..."
+
 
     }
-    
+
   }
   function readOnPlayerSwitchErr(error) {
     readStatus = "fail";
@@ -296,18 +296,18 @@ function fb_readOnPlayerSwitch(_path, _key, _data) {
 
 
 //reads turn
-function fb_readPlayerSwitch(){
+function fb_readPlayerSwitch() {
   firebase.database().ref(LOBBYDATA + '/' + sessionStorage.getItem('host.uid') + '/' + "turn").once("value", fb_processReadPlayerSwitch);
   //tells what new turn is
   function fb_processReadPlayerSwitch(snapshot) {
-    if (snapshot.val() == null){
+    if (snapshot.val() == null) {
       //once record is deleted send back to landing page
-      window.location.href="lp_landingPage.html";
+      window.location.href = "lp_landingPage.html";
     } else {
       fb_userTurn = snapshot.val()
-    console.log('fb_readPlayerSwitch fb_userTurn =' + fb_userTurn);
+      console.log('fb_readPlayerSwitch fb_userTurn =' + fb_userTurn);
     }
-    
+
   }
 }
 /**************************************************************/
@@ -335,18 +335,7 @@ function fb_readRec(_path, _key, _data, _processData) {
     else {
       readStatus = "OK";
       fb_readRecAdmin(ADMIN, userDetails.uid, userDetails);
-      admin = true;
-      console.log("You are an admin");
-      let b_lpAdmin = document.getElementById("b_lpAdmin");
-
-      if (b_lpAdmin) {
-        b_lpAdmin.style.display = "block";
-      }
-
-
-      // if (_path == "admin") {
-      //   admin = true;
-      //   document.getElementById("b_lpAdmin").style.display = "block";
+      
     }
     console.log(_data)
 
@@ -370,15 +359,25 @@ function fb_readRecAdmin(_path, _key, _data) {
   console.log("checking admins");
 
   readStatus = "waiting";
-  firebase.database().ref(_path).once("value", gotRecordAdmin, readErr);
+  firebase.database().ref(_path + '/' + _key).once("value", gotRecordAdmin, readErr);
 
   function gotRecordAdmin(snapshot) {
 
     if (snapshot.val() == null) {
       readStatus = "no record";
+      console.log("user is not an admin");
+        
 
     } else {
       readStatus = "OK";
+      
+      admin = true;
+      console.log("You are an admin");
+      let b_lpAdmin = document.getElementById("b_lpAdmin");
+
+      if (b_lpAdmin) {
+        b_lpAdmin.style.display = "block";
+      }
 
       // let dbData = snapshot.val();
 
@@ -418,7 +417,7 @@ function fb_processRec(_dbData, _data) {
   console.log(_dbData)
 
   if (_dbData == null && admin == false) {
-    console.log(admin);
+    console.log("admin = " + admin);
     // window.location.href = "index.html";
     window.location.href = "registrationPage.html";
 
@@ -455,7 +454,8 @@ function fb_processRec(_dbData, _data) {
       admin = false;
     } else if (admin == false) {
 
-      admin = true;
+      admin = false;
+      sessionStorage.setItem("adminUser", admin);
       _data.score = _dbData.score;
       //  document.getElementById('pPreviousScore').innerHTML = "Highscore: Level " + _dbData.score;
       userDetails.gameName = _dbData.gameName;
@@ -463,6 +463,7 @@ function fb_processRec(_dbData, _data) {
       console.log("process score. score: " + _dbData.score);
     } else {
       console.log("else");
+      admin = true;
       window.location.href = "lp_landingPage.html";
       sessionStorage.setItem("adminUser", admin);
 
@@ -474,7 +475,7 @@ function fb_processRec(_dbData, _data) {
 
 //the number getting guessed 
 
-function fb_targetNum(_path, _key, _data){
+function fb_targetNum(_path, _key, _data) {
   firebase.database().ref(_path + '/' + _key + '/' + _data).once("value", fb_processTargetNum);
   function fb_processTargetNum(snapshot) {
     targetNum = snapshot.val();

@@ -25,26 +25,7 @@ function lg_console(_text, _color) {
   }
 }
 
-// key events (B key)
-document.addEventListener("keydown", (b) => {
-  if (b.key == "b") {
-    //if keypressed is b
-    if (lg_logit == true) {
-      lg_logit = false;
-      p_debug.textContent = lg_logit;
-      console.log(lg_logit);
 
-    } else {
-      // if not b
-      lg_logit = true;
-      p_debug.textContent = lg_logit;
-      console.log(lg_logit);
-    }
-    sessionStorage.setItem("keyCode", "Smith");
-
-  }
-
-});
 //console logging user data and checking if saved to session storage
 function sessionData() {
   console.log("SessionTest" + sessionStorage.getItem("user.uid"));

@@ -49,7 +49,6 @@ function gs_switchTurns() {
 
 }
 
-
 // submit button click on guess the num game
 function gs_guessNumSubmit() {
   i_inputBox.style.display = 'none';
@@ -65,7 +64,7 @@ function gs_guessNumSubmit() {
     //updating scores
 
     //player 1 wins - issue a read instead of 0
-    var userScore = 50 + 1;
+    var userScore = 0 + 1;
 
     Scores = {
       score: userScore
