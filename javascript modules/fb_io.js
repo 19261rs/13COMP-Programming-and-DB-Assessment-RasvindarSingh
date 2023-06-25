@@ -118,7 +118,6 @@ function fb_login() {
         });
     }
   }
-  // LoginBtnClick()
 }
 
 /**************************************************************/
@@ -254,7 +253,6 @@ function fb_readOn(_path, _key, _data) {
   function readOnErr(error) {
     readStatus = "fail";
     console.log(error);
-    //  _processAll(_data, snapshot, dbKeys);
   }
 }
 
@@ -268,22 +266,29 @@ function fb_readOnPlayerSwitch(_path, _key, _data) {
   console.log('fb_readOnPlayerSwitch: path= ' + _path);
 
   readStatus = "waiting";
+
+
   firebase.database().ref(_path + "/" + _key + "/" + _data).on("value", processReadOnPlayerSwitch, readOnPlayerSwitchErr);
 
   function processReadOnPlayerSwitch() {
     console.log(_data + " has been changed - Function processReadOnPlayerSwitch");
     fb_readPlayerSwitch();
+    
     if (myPlayerNumSS === fb_userTurn) {
+      gs_startTime();
       userStatus.innerHTML = "It is your turn. Submit a guess."
       i_inputBox.style.display = "block";
       submit.style.display = "block"
+        
+
+      
     } else {
 
       i_inputBox.style.display = "none";
       submit.style.display = "none";
       userStatus.innerHTML = "Waiting for other player..."
-
-
+      
+  
     }
 
   }
@@ -379,24 +384,7 @@ function fb_readRecAdmin(_path, _key, _data) {
         b_lpAdmin.style.display = "block";
       }
 
-      // let dbData = snapshot.val();
-
-      // //console.log(dbData);-
-      // let dbKeys = Object.keys(dbData);
-      // let key = dbKeys[0];
-
-      // for (i = 0; i < dbKeys.length; i++) {
-      //   let key = dbKeys[i];
-
-      //   if (userDetails.uid == dbData[key].uid) {
-      //     console.log("You are an admin");
-      //     admin = true;
-      //     document.getElementById("b_lpAdmin").style.display = "block"
-      //     window.location.href="lp_landingPage.html"
-
-      //   }
-
-      // }
+     
 
     }
 
@@ -421,16 +409,10 @@ function fb_processRec(_dbData, _data) {
     // window.location.href = "index.html";
     window.location.href = "registrationPage.html";
 
-
-    // document.getElementById("p_regName").innerHTML  = sessionStorage.getItem("user.name");    
-    // document.getElementById("p_regEmail").innerHTML = sessionStorage.getItem("user.email");  
   } else {
 
     console.log(_data);
     if (_data.email != null) {
-
-      // document.getElementById('pGameName').innerHTML = "Username: " + _dbData.gameName;
-
 
       _data.uid = _dbData.uid;
       _data.name = _dbData.name;
@@ -439,13 +421,6 @@ function fb_processRec(_dbData, _data) {
       _data.photoURL = _dbData.photoURL;
       _data.gameName = _dbData.gameName;
       _data.age = _dbData.age;
-
-      // //session storage, taking info from the login of user to take to next page
-      //   sessionStorage.setItem("user.uid", dbData.uid);
-      //   sessionStorage.setItem("user.email", dbData.uid);
-      //   sessionStorage.setItem("user.name", dbData.uid);
-      //   sessionStorage.setItem("user.photoURL", dbData.uid);
-
 
       console.log(_data);
       console.log("process username. username: " + _dbData.gameName);

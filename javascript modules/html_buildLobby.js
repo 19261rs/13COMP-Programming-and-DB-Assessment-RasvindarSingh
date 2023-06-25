@@ -202,6 +202,7 @@ function html_p2Update() {
   html_hostUid = sessionStorage.getItem("host.uid");
   console.log(html_hostUid);
   fb_lobbyUpdate(LOBBYDATA, html_hostUid, lobbyData);
+ 
 
 }
 

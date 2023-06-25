@@ -6,9 +6,6 @@ MODULENAME = "test_call.js";
 console.log('%c' + MODULENAME + ': ', 'color:blue;' );
 
 
-
-
-
 // database access
 const DETAILS = "userDetails";      //<=============== INSERT YOUR FIREBASE PATH NAME HERE
 var BB = "Scores";
