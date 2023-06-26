@@ -1,3 +1,10 @@
+/*----------------------------------------------------*/
+// gs_gameCode.js
+// Written by Rasvindar Singh, Term 1 & 2 2023
+// Code for the guess the number game functionality and page.
+/*----------------------------------------------------*/
+
+//Global Variable delcaration 
 MODULENAME = "gs_gameCode.js";
 console.log('%c' + MODULENAME + ': ', 'color: blue;');
 
@@ -10,8 +17,11 @@ var timeInterval;
 var timeLeft = 20;
 var readPlayerSwitch = true;
 
-
+/**************************************************************/
+//   gs_randomNumberGen function. 
 // generating a random rumber and writing to open FB lobby feild, ranNum between 1 -10 
+// runs onLoad to the game page
+/**************************************************************/
 function gs_randomNumberGen() {
   gs_randomGameNum = Math.floor(Math.random() * 10) + 1;
   console.log(gs_randomGameNum);
@@ -30,7 +40,6 @@ function gs_readOnPlayerSwitch() {
   console.log('issued fb_readOnPlayerSwitch');
   readPlayerSwitch = false;
 
-
 }
 
 //back to landing page button
@@ -43,6 +52,7 @@ function gs_goBackLandingBtn() {
 function gs_readOnOne() {
   console.log("gs_readOnOne running");
   fb_readOn(LOBBYDATA, sessionStorage.getItem("host.uid"), "join");
+  // gs_onDisconnect(); //new
 }
 
 
@@ -61,16 +71,16 @@ function gs_switchTurns() {
 
 }
 
-
+/**************************************************************/
+//   gs_startTime function. starting time/resseting
+/**************************************************************/
 function gs_startTime() {
-
 
   timeInterval = setInterval(function() {
     timeLeft = parseInt(timeLeft);
     timeLeft--;
     console.log("time left: " + timeLeft + " seconds");
-
-
+    document.getElementById("timer").innerHTML = "Time left to make a guess: " + timeLeft + " seconds"
 
     if (timeLeft <= 0) {
       clearInterval(timeInterval);
@@ -90,13 +100,14 @@ function gs_startTime() {
 
       fb_lobbyUpdate(LOBBYDATA, sessionStorage.getItem("host.uid"), lobbyData);
 
-
     }
 
     if (timeLeft <= 0) {
       i_inputBox.style.display = "none";
       submit.style.display = "none";
       userStatus.innerHTML = "Waiting for other player...";
+      timer.innerHTML = "waiting for other guy";
+
     }
   }, 1000);
 
@@ -104,15 +115,10 @@ function gs_startTime() {
 
 }
 
-
-
 /**************************************************************/
 //   gs_guessNumSubmit function
 /**************************************************************/
 // submit button click on guess the num game
-
-
-
 function gs_guessNumSubmit() {
 
   guessedNumInput = gs_getGuessInput('form_guess', 0);
@@ -147,7 +153,7 @@ function gs_guessNumSubmit() {
         score: userScore
       };
       //updates score and kicks them to landing page
-      fb_lobbyUpdate(SCORES, userDetails.uid, Scores);
+      fb_scoresUpdate(SCORES, userDetails.uid, "score");
       //deleting record
       fb_delRec(LOBBYDATA, sessionStorage.getItem("host.uid"));
       //sending user home
@@ -177,28 +183,20 @@ function gs_guessNumSubmit() {
           p2RecentGuess: guessedNumInput
         }
         fb_lobbyUpdate(LOBBYDATA, sessionStorage.getItem('host.uid'), lobbyData);
-
-
-
       }
-
 
     }
     // Reset timer countdown
     clearInterval(timeInterval);
     timeLeft = 20;
 
-
   }
 }
 
-
-
-
 /**************************************************************/
 //   gs_getGuessInput function
+//getting guess form value from the input box that users input guess in
 /**************************************************************/
-//getting guess form value from the input box 
 function gs_getGuessInput(_elementId, _item) {
   return document.getElementById(_elementId).elements.item(_item).value;
 }
@@ -207,9 +205,57 @@ function gs_getGuessInput(_elementId, _item) {
 //   onDisconnect function. Runs when user disconnects
 /**************************************************************/
 function gs_onDisconnect() {
-  //WIP
-}
+  var myNum = sessionStorage.getItem('myPlayerNum');
+  const HOSTFBKEY = sessionStorage.getItem("host.uid");
+  const LOBBYREF =  firebase.database().ref(LOBBYDATA + '/' + HOSTFBKEY);
+  
+  if (myNum == 0) {
+   LOBBYREF.onDisconnect().update(//checking if player 1/host has disconnected
+      {
+        hostLeft: "true"
 
+      }
+    )
+  } else if (myNum == 1) { //checking if player 2 has disconnected
+  LOBBYREF.onDisconnect().update(
+      {
+        p2PlayerLeft: "true"
+    
+
+      }
+    )
+  }
+  if (myNum == 0) {
+    //deleting lobby and kicking out other player
+    var p2DiscRef = firebase.database().ref(LOBBYDATA + '/' + HOSTFBKEY + '/' + "p2PlayerLeft");
+    p2DiscRef.on("value", snapshot => {
+      var discRefData = snapshot.val()
+      console.log(discRefData);
+      if (discRefData == "true") {
+      
+        alert("Player 2 has disconnected. You will be kicked.");
+        LOBBYREF.remove(); // deleting lobby
+        LOBBYREF.onDisconnect().cancel();
+      }
+
+    })
+
+  } else if (myNum == 1){
+      var p1DiscRef = firebase.database().ref(LOBBYDATA + '/' + HOSTFBKEY + '/' + "hostLeft");
+  
+    p1DiscRef.on("value", snapshot => {
+      var discRefData = snapshot.val()
+         console.log(discRefData);
+      if (discRefData == "true") {
+        alert("Player 1 has disconnected. You will be kicked.");
+        LOBBYREF.remove(); // deleting lobby
+        LOBBYREF.onDisconnect().cancel();
+      } 
+
+    })
+  } 
+
+}
 
 /**************************************************************/
 //    END OF MODULE

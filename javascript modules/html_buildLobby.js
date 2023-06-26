@@ -99,6 +99,8 @@ function html_buildTableFunc(_tableBodyID, _array) {
   // Get all the info on the table
   var html_table = document.getElementById(_tableBodyID);
 
+
+  
   // Loop thu array; build row & add it to table
   for (i = 0; i < _array.length; i++) {
     // Back ticks define a temperate literal
@@ -158,6 +160,7 @@ function html_getLobbyData() {
     p1Wins: 0,
     p1Losses: 0,
     p1RecentGuess: 0,
+    hostLeft: "false",
     join: 0,
     turn: 1
     // p2Uid: ,
@@ -180,7 +183,12 @@ function html_p2Join() {
   // sessionStorage.setItem("p2.wins", userDetails.wins),
   // sessionStorage.setItem("p2.losses", userDetails.losses),
   sessionStorage.setItem("join", 1);
-}
+//   lobbyData = {
+//     hostLeft:"false"
+//   } 
+//   fb_lobbyUpdate(LOBBYDATA, sessionStorage.getItem("host.uid"), "hostLeft");
+//   gs_onDisconnect();
+ }
 
 function html_p2Update() {
   const LOBBYDATA = "lobbyData";
@@ -192,9 +200,11 @@ function html_p2Update() {
     p2Wins: 0,
     p2Losses: 0,
     p2RecentGuess: 0,
+    p2PlayerLeft: "false",
+    hostLeft: "false",
     turn: 0,
     // ranNum: parseInt(sessionStorage.getItem("gs_gameNum"), 10)
-
+    
   }
   
   // fb_lobbyUpdate(LOBBYDATA, sessionStorage.getItem("host.uid"), lobbyData);
@@ -202,7 +212,8 @@ function html_p2Update() {
   html_hostUid = sessionStorage.getItem("host.uid");
   console.log(html_hostUid);
   fb_lobbyUpdate(LOBBYDATA, html_hostUid, lobbyData);
- 
+  gs_startTime();
+
 
 }
 
@@ -220,7 +231,7 @@ function procLobbies(_readStatus, _snapshot, _data, _error) {
     for (i = 0; i < dbKeys.length; i++) {
       let key = dbKeys[i];
       lobbyArray.push({
-        lb_join: dbData[key].lb_join,
+        join: dbData[key].join,
         p1gameName: dbData[key].p1gameName,
         p1Uid: dbData[key].p1Uid,
         p1Wins: dbData[key].p1Wins,

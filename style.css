@@ -189,6 +189,15 @@ GAME PAGE styling
 
 
 
+/*--- Centering input guess box  ---*/
+#i_inputBox {
+  margin: 0 auto;
+}
+/*--- Centering submit guess btn  ---*/
+#submit {
+  margin: 0 auto;
+}
+
 
 #stopButtonGame {
   display: none;

@@ -153,8 +153,7 @@ function fb_writeRec(_path, _key, _data) {
           writeStatus = "OK";
         } else {
 
-          //    document.getElementById("pGameName").innerHTML = "Username: "+_data.gameName;
-          //    document.getElementById("pPreviousScore").innerHTML = "Your High score: "+_data.score;
+      
 
         }
       }
@@ -203,6 +202,31 @@ function fb_lobbyUpdate(_path, _key, _data) {
     });
   console.log("fb_lobbyUpdate: exit")
 }
+
+// Update Just Scores func
+function fb_scoresUpdate(_path, _key, _data) {
+  console.log('fb_scoresUpdate: path= ' + _path + '  key= ' + _key +
+    '  data= ' + _data.name + '/' + _data.score);
+  console.log(_data);
+
+  //                           PATH  /  KEY 
+  writeStatus = 'waiting';
+  firebase.database().ref(_path + '/' + _key + '/' + _data).update(_data,
+
+    function(error) {
+      if (error) {
+        writeStatus = 'failure';
+        console.log(error);
+      }
+      else {
+        writeStatus = "OK";
+        console.log("fb_scoresUpdate is successful");
+      }
+    });
+  console.log("fb_lobbyUpdate: exit")
+}
+
+
 
 /**************************************************************/
 // fb_readAll(_path, _data)
@@ -279,14 +303,15 @@ function fb_readOnPlayerSwitch(_path, _key, _data) {
       userStatus.innerHTML = "It is your turn. Submit a guess."
       i_inputBox.style.display = "block";
       submit.style.display = "block"
+       gs_onDisconnect();
         
-
-      
     } else {
 
       i_inputBox.style.display = "none";
       submit.style.display = "none";
       userStatus.innerHTML = "Waiting for other player..."
+
+     timer.innerHTML = "";
       
   
     }
