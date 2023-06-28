@@ -1,6 +1,6 @@
 /**************************************************************/
 // fb_io.js
-// Written by Mr. Gillies with edits done by Rasvindar   2023
+// Written by Rasvindar Term 1 and 2 2023
 /**************************************************************/
 var admin = false;
 
@@ -153,7 +153,7 @@ function fb_writeRec(_path, _key, _data) {
           writeStatus = "OK";
         } else {
 
-      
+
 
         }
       }
@@ -211,7 +211,7 @@ function fb_scoresUpdate(_path, _key, _data) {
 
   //                           PATH  /  KEY 
   writeStatus = 'waiting';
-  firebase.database().ref(_path + '/' + _key + '/' + _data).update(_data,
+firebase.database().ref(_path + '/' + _key + '/' + _data).update(_data,
 
     function(error) {
       if (error) {
@@ -297,23 +297,20 @@ function fb_readOnPlayerSwitch(_path, _key, _data) {
   function processReadOnPlayerSwitch() {
     console.log(_data + " has been changed - Function processReadOnPlayerSwitch");
     fb_readPlayerSwitch();
-    
+
     if (myPlayerNumSS === fb_userTurn) {
       gs_startTime();
       userStatus.innerHTML = "It is your turn. Submit a guess."
       i_inputBox.style.display = "block";
       submit.style.display = "block"
-       gs_onDisconnect();
-        
+      gs_onDisconnect();
+
     } else {
 
       i_inputBox.style.display = "none";
       submit.style.display = "none";
       userStatus.innerHTML = "Waiting for other player..."
-
-     timer.innerHTML = "";
-      
-  
+      timer.innerHTML = "";
     }
 
   }
@@ -365,7 +362,7 @@ function fb_readRec(_path, _key, _data, _processData) {
     else {
       readStatus = "OK";
       fb_readRecAdmin(ADMIN, userDetails.uid, userDetails);
-      
+
     }
     console.log(_data)
 
@@ -396,11 +393,11 @@ function fb_readRecAdmin(_path, _key, _data) {
     if (snapshot.val() == null) {
       readStatus = "no record";
       console.log("user is not an admin");
-        
+
 
     } else {
       readStatus = "OK";
-      
+
       admin = true;
       console.log("You are an admin");
       let b_lpAdmin = document.getElementById("b_lpAdmin");
@@ -409,7 +406,7 @@ function fb_readRecAdmin(_path, _key, _data) {
         b_lpAdmin.style.display = "block";
       }
 
-     
+
 
     }
 

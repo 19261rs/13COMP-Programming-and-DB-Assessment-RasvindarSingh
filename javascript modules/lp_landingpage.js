@@ -1,5 +1,11 @@
+/*----------------------------------------------------*/
+// lp_landingpage.js
+// Written by Rasvindar Singh, Term 1 & 2 2023
+// Code for landing page HTML.
+/*----------------------------------------------------*/
 
-MODULENAME = "lp_landingpage.js";
+//Global Variable declaration
+ MODULENAME = "lp_landingpage.js";
 console.log('%c' + MODULENAME + ': ', 'color:blue;');
 
 // Greeting the user with their personal name on landing page
@@ -11,7 +17,7 @@ document.getElementById('i_lpuserPhotoURL').src = sessionStorage.getItem("user.p
 //click to go into game function
 function lp_enterBtnClick() {
   console.log("b_goBackLandingBtn");
-//window.location.href = "gp_gamePage.html";
+  //window.location.href = "gp_gamePage.html";
   window.location.href = "lb_lobbyPage.html";
 }
 
@@ -23,5 +29,9 @@ function lp_instructionBtnClick() {
 };
 
 function lp_toLeaderboardPage() {
-  window.location.href="lb_leaderboardPage.html"
+  window.location.href = "lb_leaderboardPage.html"
 }
+
+/**************************************************************/
+//    END OF MODULE
+/**************************************************************/

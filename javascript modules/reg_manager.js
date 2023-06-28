@@ -11,8 +11,9 @@
 // v06 Check if form passed html validation
 /*-------------------------------------------------------------------*/
 
-MODULENAME = "reg_manager.js";
-console.log('%c' + MODULENAME + ': ', 'color:blue;' );
+//Global variable declaration
+ MODULENAME = "reg_manager.js";
+console.log('%c' + MODULENAME + ': ', 'color:blue;');
 
 
 /*************************************************************          //<=======
@@ -30,16 +31,16 @@ console.log('%c' + MODULENAME + ': ', 'color:blue;' );
          files from the zipped folder.                                  //<=======
     7. Upload all the images to you projects images folder.             //<=======
 *************************************************************/          //<=======
-  // These two lines need to be executed only after the                 //<=======
-  //  registration page is displayed                                    //<=======
-  // Save name & email into the form
-  // ENSURE THE OBJECT NAME IS CORRECT; its currently details           //<======= 
+// These two lines need to be executed only after the                 //<=======
+//  registration page is displayed                                    //<=======
+// Save name & email into the form
+// ENSURE THE OBJECT NAME IS CORRECT; its currently details           //<======= 
 
 
 
 
-  document.getElementById("p_regName").innerHTML  = sessionStorage.getItem("user.name");        //<=======    
-  document.getElementById("p_regEmail").innerHTML = sessionStorage.getItem("user.email");//<=======   
+document.getElementById("p_regName").innerHTML = sessionStorage.getItem("user.name");        //<=======    
+document.getElementById("p_regEmail").innerHTML = sessionStorage.getItem("user.email");//<=======   
 
 /*-------------------------------------------------------------------*/
 // reg_regDetailsEntered()
@@ -49,50 +50,50 @@ console.log('%c' + MODULENAME + ': ', 'color:blue;' );
 // Return:
 /*-------------------------------------------------------------------*/
 function reg_regDetailsEntered() {
-  console.log('reg_regDetailsEntered'); 
-  
-     
+  console.log('reg_regDetailsEntered');
+
+
   // Save player1's details from the form into your details object
   //  ENSURE THE OBJECT NAME THE PROGRAM SAVES TO IS CORRECT; 
   //    its currently details                                           //<======= 
-  userDetails.gameName     =        reg_getFormItemValue("f_reg", 0);       //<=======
-  userDetails.age        = Number(reg_getFormItemValue("f_reg", 3));    
-  userDetails.phone  = reg_getFormItemValue("f_reg", 1);//<=======
+  userDetails.gameName = reg_getFormItemValue("f_reg", 0);       //<=======
+  userDetails.age = Number(reg_getFormItemValue("f_reg", 3));
+  userDetails.phone = reg_getFormItemValue("f_reg", 1);//<=======
 
-  var storedgameName =  reg_getFormItemValue("f_reg", 0);
+  var storedgameName = reg_getFormItemValue("f_reg", 0);
   var storedAge = Number(reg_getFormItemValue("f_reg", 3));
-  var storedPhone  =  reg_getFormItemValue("f_reg", 1);
-  
+  var storedPhone = reg_getFormItemValue("f_reg", 1);
+
   console.log("reg_regDetailsEntered: form passed html validation - " +
-            document.getElementById('f_reg').checkValidity()); 
+    document.getElementById('f_reg').checkValidity());
 
   // Only write record to DB if all the fom's input passed html validation
 
   if (document.getElementById('f_reg').checkValidity()) {
     var storedDetails = { // except gamename and phone
-      uid:     sessionStorage.getItem("user.uid"),
-     email:     sessionStorage.getItem("user.email"),
-     name:         sessionStorage.getItem("user.name"),
-     photoURL:   sessionStorage.getItem("user.photoURL") ,
-     // score:    'n/a',
+      uid: sessionStorage.getItem("user.uid"),
+      email: sessionStorage.getItem("user.email"),
+      name: sessionStorage.getItem("user.name"),
+      photoURL: sessionStorage.getItem("user.photoURL"),
+      // score:    'n/a',
       gameName: storedgameName,
-     phone: storedPhone,
-     age: storedAge
-      
+      phone: storedPhone,
+      age: storedAge
+
     };
-      
-         // window.location.href="lp_landingPage.html";
-        
-    
+
+    // window.location.href="lp_landingPage.html";
+
+
     // call your function to write to details record firebase         //<=======
- // document.getElementById('pGameName').innerHTML = "Username: " + userDetails.gameName;
-  // fb_writeRec(DETAILS, userDetails.uid, userDetails); 
+    // document.getElementById('pGameName').innerHTML = "Username: " + userDetails.gameName;
+    // fb_writeRec(DETAILS, userDetails.uid, userDetails); 
     fb_writeRec(DETAILS, sessionStorage.getItem("user.uid"), storedDetails);
 
     if (regToLanding.style.display = "none") {
       regToLanding.style.display = "block";
     } else {
-            regToLanding.style.display = "none";
+      regToLanding.style.display = "none";
     }
 
   }
@@ -108,7 +109,7 @@ function reg_regDetailsEntered() {
 function reg_getFormItemValue(_elementId, _item) {
   //console.log('reg_getFormItemValue: _elementId=' + _elementId +
   //	  ',  _item= ' + _item);
-    
+
   return document.getElementById(_elementId).elements.item(_item).value;
 }
 

@@ -1,8 +1,6 @@
 
 //NEED TO DO: RELOCATE EVERYTHING IN THIS MODULE TO THE APPROPRIATE ONE AND GET RID OF TEST_CALL.JS
-
 MODULENAME = "test_call.js";
-
 console.log('%c' + MODULENAME + ': ', 'color:blue;' );
 
 

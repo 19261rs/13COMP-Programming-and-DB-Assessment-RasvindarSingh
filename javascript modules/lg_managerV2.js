@@ -1,15 +1,19 @@
 
-
+/*----------------------------------------------------*/
+//lg_managerV2.js
+// Written by Rasvindar Singh, Term 1 & 2 2023
+// login functionality/session storage
+/*----------------------------------------------------*/
 
 // Version 2 - Key events 
-MODULENAME = "lg_managerV2.js";
+ MODULENAME = "lg_managerV2.js";
 
-console.log('%c' + MODULENAME + ': ', 'color:blue;' );
+console.log('%c' + MODULENAME + ': ', 'color:blue;');
 
 
 //login function
 function login() {
- fb_initialise();
+  fb_initialise();
   fb_login(userDetails);
 }
 
@@ -34,6 +38,9 @@ function sessionData() {
   console.log("SessionTest" + sessionStorage.getItem("user.name"));
 }
 
+/**************************************************************/
+//    END OF MODULE
+/**************************************************************/
 
 
 

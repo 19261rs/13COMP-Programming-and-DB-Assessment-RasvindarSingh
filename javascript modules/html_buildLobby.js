@@ -5,7 +5,7 @@
 // NOTE: uses a temperate literal
 /*----------------------------------------------------*/
 const LOBBYDATA = "lobbyData";
-MODULENAME = "html_buildLobby.js";
+ MODULENAME = "html_buildLobby.js";
 console.log('%c' + MODULENAME + ': ', 'color: blue;');
 
 /*----------------------------------------------------*/
@@ -100,7 +100,7 @@ function html_buildTableFunc(_tableBodyID, _array) {
   var html_table = document.getElementById(_tableBodyID);
 
 
-  
+
   // Loop thu array; build row & add it to table
   for (i = 0; i < _array.length; i++) {
     // Back ticks define a temperate literal
@@ -134,7 +134,7 @@ function html_buildTableFunc(_tableBodyID, _array) {
       console.log(sessionStorage.getItem("host.uid"));
       myPlayerNum = 1;
       sessionStorage.setItem('myPlayerNum', myPlayerNum);
-      
+
       html_p2Update();
     });
   });
@@ -183,13 +183,14 @@ function html_p2Join() {
   // sessionStorage.setItem("p2.wins", userDetails.wins),
   // sessionStorage.setItem("p2.losses", userDetails.losses),
   sessionStorage.setItem("join", 1);
-//   lobbyData = {
-//     hostLeft:"false"
-//   } 
-//   fb_lobbyUpdate(LOBBYDATA, sessionStorage.getItem("host.uid"), "hostLeft");
-//   gs_onDisconnect();
- }
+  //   lobbyData = {
+  //     hostLeft:"false"
+  //   } 
+  //   fb_lobbyUpdate(LOBBYDATA, sessionStorage.getItem("host.uid"), "hostLeft");
+  //   gs_onDisconnect();
+}
 
+//p2 joins the game and updates lobbyData with new feilds 
 function html_p2Update() {
   const LOBBYDATA = "lobbyData";
   lobbyData = {
@@ -204,9 +205,9 @@ function html_p2Update() {
     hostLeft: "false",
     turn: 0,
     // ranNum: parseInt(sessionStorage.getItem("gs_gameNum"), 10)
-    
+
   }
-  
+
   // fb_lobbyUpdate(LOBBYDATA, sessionStorage.getItem("host.uid"), lobbyData);
   // fb_lobbyUpdate(LOBBYDATA, userDetails.uid, lobbyData);
   html_hostUid = sessionStorage.getItem("host.uid");
@@ -258,7 +259,7 @@ function html_getHostUid() {
 }
 
 //sets host to player 0
-function html_setNumForHost(){
+function html_setNumForHost() {
   myPlayerNum = 0;
   sessionStorage.setItem('myPlayerNum', myPlayerNum);
 }
