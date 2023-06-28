@@ -166,12 +166,7 @@ function gs_guessNumSubmit() {
      //  //updates score and kicks them to landing page
      //  fb_scoresUpdate(SCORES, userDetails.uid, "score");
       //deleting record
-            //updating score
-      fb_updateScore(SCORES, userDetails.uid, "score");
-
-
       fb_delRec(LOBBYDATA, sessionStorage.getItem("host.uid"));
-      
     
       //sending user home
       window.location.href = "lp_landingPage.html";
@@ -220,7 +215,7 @@ function gs_getGuessInput(_elementId, _item) {
 
 /**************************************************************/
 //   onDisconnect function. Runs when user disconnects
-// Ran onLoad on gp_gamePage.html
+// Called by processReadOnPlayerSwitch(); on fb_io.js
 /**************************************************************/
 function gs_onDisconnect() {
   var myNum = sessionStorage.getItem('myPlayerNum');

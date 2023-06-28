@@ -145,7 +145,7 @@ function fb_writeRec(_path, _key, _data) {
         if (_path != "Scores") {
           var details = {
             uid: sessionStorage.getItem("user.uid"),
-            gameName: userDetails.gameName,
+            gameName: userDetails.name,
             score: 0
 
           };
@@ -186,18 +186,19 @@ function fb_lobbyUpdate(_path, _key, _data) {
         if (_path != "Scores") {
           var details = {
             uid: sessionStorage.getItem("user.uid"),
-            gameName: userDetails.gameName,
+            gameName: userDetails.name,
             score: 0
 
           };
           fb_lobbyUpdate(BB, userDetails.uid, details);
           writeStatus = "OK";
-        } else {
-
-          //    document.getElementById("pGameName").innerHTML = "Username: "+_data.gameName;
-          //    document.getElementById("pPreviousScore").innerHTML = "Your High score: "+_data.score;
-
         }
+        // } else {
+
+        //   //    document.getElementById("pGameName").innerHTML = "Username: "+_data.gameName;
+        //   //    document.getElementById("pPreviousScore").innerHTML = "Your High score: "+_data.score;
+
+        // }
       }
     });
   console.log("fb_lobbyUpdate: exit")
@@ -303,7 +304,7 @@ function fb_readOnPlayerSwitch(_path, _key, _data) {
       userStatus.innerHTML = "It is your turn. Submit a guess."
       i_inputBox.style.display = "block";
       submit.style.display = "block"
-      gs_onDisconnect();
+      // gs_onDisconnect();
 
     } else {
 
@@ -470,8 +471,7 @@ function fb_processRec(_dbData, _data) {
 }
 
 
-//the number getting guessed 
-
+//the number getting guessed processed
 function fb_targetNum(_path, _key, _data) {
   firebase.database().ref(_path + '/' + _key + '/' + _data).once("value", fb_processTargetNum);
   function fb_processTargetNum(snapshot) {
@@ -479,13 +479,32 @@ function fb_targetNum(_path, _key, _data) {
   }
 }
 
-//deleting fb record function
+//deleting fb record function, called when a user wins 
 function fb_delRec(_path, _key) {
   console.log("fb_delRec");
   firebase.database().ref(_path + '/' + _key).remove();
   console.log("deleted record")
 }
 
+//updating score func
+function fb_updateScore(_path, _key, _data){
+  firebase.database().ref(_path + '/' + _key + '/' + _data).once("value", fb_processScoreUpdate)
+
+  function fb_processScoreUpdate(snapshot) {
+    if (snapshot.val()==null) {
+      //if score is nothing
+      
+    } else {
+      var fetchScore = snapshot.val();
+      fetchScore = fetchScore + 1;
+      Scores = {
+        score: fetchScore
+      
+      }
+      fb_scoresUpdate(SCORES, userDetails.uid, Scores);
+    }
+  }
+}
 /**************************************************************/
 //    END OF MODULE
 /**************************************************************/
