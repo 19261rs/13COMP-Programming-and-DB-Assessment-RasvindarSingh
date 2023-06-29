@@ -330,6 +330,12 @@ function fb_readPlayerSwitch() {
   function fb_processReadPlayerSwitch(snapshot) {
     if (snapshot.val() == null) {
       //once record is deleted send back to landing page
+      //turn off ondisconnect
+      firebase.database().ref(LOBBYDATA + '/' + sessionStorage.getItem("host.uid") + '/' + "hostLeft").off();
+      firebase.database().ref(LOBBYDATA + '/' + sessionStorage.getItem("host.uid") + '/' + "p2PlayerLeft").off();
+      //fb_delRec(LOBBYDATA, sessionStorage.getItem("host.uid"));
+      firebase.database().ref(LOBBYDATA + '/' + sessionStorage.getItem("host.uid")).remove(); // deleting lobby
+      firebase.database().ref(LOBBYDATA + '/' + sessionStorage.getItem("host.uid")).onDisconnect().cancel();
       window.location.href = "lp_landingPage.html";
     } else {
       fb_userTurn = snapshot.val()

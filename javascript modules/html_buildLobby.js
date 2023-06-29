@@ -163,11 +163,7 @@ function html_getLobbyData() {
     hostLeft: "false",
     join: 0,
     turn: 1
-    // p2Uid: ,
-    // p2gameName: ,
-    // p2Wins: 0,
-    // p2Losses:0 ,
-
+   
   }
   console.table(lobbyData);
   fb_writeRec(LOBBYDATA, sessionStorage.getItem("user.uid"), lobbyData);

@@ -157,7 +157,11 @@ function gs_guessNumSubmit() {
       alert("You Win");
       //updating score and deleting rec
       fb_updateScore(SCORES, userDetails.uid, "score");
-      fb_delRec(LOBBYDATA, sessionStorage.getItem("host.uid"));
+      firebase.database().ref(LOBBYDATA + '/' + sessionStorage.getItem("host.uid") + '/' + "hostLeft").off();
+      firebase.database().ref(LOBBYDATA + '/' + sessionStorage.getItem("host.uid") + '/' + "p2PlayerLeft").off();
+      //fb_delRec(LOBBYDATA, sessionStorage.getItem("host.uid"));
+      firebase.database().ref(LOBBYDATA + '/' + sessionStorage.getItem("host.uid")).remove(); // deleting lobby
+      firebase.database().ref(LOBBYDATA + '/' + sessionStorage.getItem("host.uid")).onDisconnect().cancel();
       
       //sending user home
       window.location.href = "lp_landingPage.html";
