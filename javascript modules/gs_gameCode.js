@@ -152,30 +152,15 @@ function gs_guessNumSubmit() {
     console.log("target num: " + targetNum);
 
     if (guessedNumInput == targetNum) {
-
+ 
       console.log("You win");
       alert("You Win");
-      
-
-     // //player 1 wins - issue a read instead of 0
-     //  var userScore = 0 + 1;
-
-     //  Scores = {
-     //    score: userScore
-     //  };
-     //  //updates score and kicks them to landing page
-     //  fb_scoresUpdate(SCORES, userDetails.uid, "score");
-      //deleting record
-            //updating score
+      //updating score and deleting rec
       fb_updateScore(SCORES, userDetails.uid, "score");
-
-
       fb_delRec(LOBBYDATA, sessionStorage.getItem("host.uid"));
       
-    
       //sending user home
       window.location.href = "lp_landingPage.html";
-
 
     } else {
 

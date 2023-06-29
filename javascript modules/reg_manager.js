@@ -14,6 +14,7 @@
 //Global variable declaration
  MODULENAME = "reg_manager.js";
 console.log('%c' + MODULENAME + ': ', 'color:blue;');
+const SCORES = "Scores";
 
 
 /*************************************************************          //<=======
@@ -49,6 +50,9 @@ document.getElementById("p_regEmail").innerHTML = sessionStorage.getItem("user.e
 // Input:   
 // Return:
 /*-------------------------------------------------------------------*/
+
+regToLanding.style.display = "none"
+
 function reg_regDetailsEntered() {
   console.log('reg_regDetailsEntered');
 
@@ -89,12 +93,19 @@ function reg_regDetailsEntered() {
     // document.getElementById('pGameName').innerHTML = "Username: " + userDetails.gameName;
     // fb_writeRec(DETAILS, userDetails.uid, userDetails); 
     fb_writeRec(DETAILS, sessionStorage.getItem("user.uid"), storedDetails);
+regToLanding.style.display = "block";
+    
+      //creates scores path  
+          var details = {
+            uid: sessionStorage.getItem("user.uid"),
+            gameName: userDetails.name,
+            score: 0
 
-    if (regToLanding.style.display = "none") {
-      regToLanding.style.display = "block";
-    } else {
-      regToLanding.style.display = "none";
-    }
+          };
+          fb_writeRec(SCORES, userDetails.uid, details);
+         
+        
+  
 
   }
 }

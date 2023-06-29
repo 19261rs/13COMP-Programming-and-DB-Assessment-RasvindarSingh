@@ -133,32 +133,32 @@ function fb_writeRec(_path, _key, _data) {
 
   //                           PATH  /  KEY 
   writeStatus = 'waiting';
-  firebase.database().ref(_path + '/' + _key).set(_data,
+  firebase.database().ref(_path + '/' + _key).set(_data);
 
-    function(error) {
-      if (error) {
-        writeStatus = 'failure';
-        console.log(error);
-      }
-      else {
-        writeStatus = "OK";
-        if (_path != "Scores") {
-          var details = {
-            uid: sessionStorage.getItem("user.uid"),
-            gameName: userDetails.name,
-            score: 0
+    // function(error) {
+      // if (error) {
+      //   writeStatus = 'failure';
+      //   console.log(error);
+      // }
+      // else {
+      //   writeStatus = "OK";
+      //   if (_path != "Scores") {
+      //     var details = {
+      //       uid: sessionStorage.getItem("user.uid"),
+      //       gameName: userDetails.name,
+      //       score: 0
 
-          };
-          fb_writeRec(BB, userDetails.uid, details);
-          writeStatus = "OK";
-        } else {
+      //     };
+      //     fb_writeRec(BB, userDetails.uid, details);
+      //     writeStatus = "OK";
+      //   } else {
 
 
 
-        }
-      }
-    });
-  console.log("fb_writeRec: exit")
+      //   }
+    //   }
+    // });
+  console.log("fb_writeRec: exit");
 }
 
 /**************************************************************/
@@ -183,16 +183,16 @@ function fb_lobbyUpdate(_path, _key, _data) {
       }
       else {
         writeStatus = "OK";
-        if (_path != "Scores") {
-          var details = {
-            uid: sessionStorage.getItem("user.uid"),
-            gameName: userDetails.name,
-            score: 0
+        // if (_path != "Scores") {
+        //   var details = {
+        //     uid: sessionStorage.getItem("user.uid"),
+        //     gameName: userDetails.name,
+        //     score: 0
 
-          };
-          fb_lobbyUpdate(BB, userDetails.uid, details);
-          writeStatus = "OK";
-        }
+        //   };
+        //   fb_lobbyUpdate(BB, userDetails.uid, details);
+        //   writeStatus = "OK";
+        // }
         // } else {
 
         //   //    document.getElementById("pGameName").innerHTML = "Username: "+_data.gameName;
@@ -212,7 +212,7 @@ function fb_scoresUpdate(_path, _key, _data) {
 
   //                           PATH  /  KEY 
   writeStatus = 'waiting';
-firebase.database().ref(_path + '/' + _key + '/' + _data).update(_data,
+firebase.database().ref(_path + '/' + _key).update(_data,
 
     function(error) {
       if (error) {
@@ -483,19 +483,20 @@ function fb_targetNum(_path, _key, _data) {
 function fb_delRec(_path, _key) {
   console.log("fb_delRec");
   firebase.database().ref(_path + '/' + _key).remove();
-  console.log("deleted record")
+  console.log("deleted record");
 }
 
-//updating score func
+//updating score func, not actually writing it 
 function fb_updateScore(_path, _key, _data){
   firebase.database().ref(_path + '/' + _key + '/' + _data).once("value", fb_processScoreUpdate)
 
   function fb_processScoreUpdate(snapshot) {
-    if (snapshot.val()==null) {
-      //if score is nothing
+    if (snapshot.val() == null) {
+      console.log("score is nothing");
       
     } else {
       var fetchScore = snapshot.val();
+      console.log("this is snapshot val = " + snapshot.val());
       fetchScore = fetchScore + 1;
       Scores = {
         score: fetchScore

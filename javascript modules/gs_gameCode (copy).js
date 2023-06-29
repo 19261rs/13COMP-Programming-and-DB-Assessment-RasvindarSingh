@@ -166,6 +166,7 @@ function gs_guessNumSubmit() {
      //  //updates score and kicks them to landing page
      //  fb_scoresUpdate(SCORES, userDetails.uid, "score");
       //deleting record
+      
       fb_delRec(LOBBYDATA, sessionStorage.getItem("host.uid"));
     
       //sending user home
