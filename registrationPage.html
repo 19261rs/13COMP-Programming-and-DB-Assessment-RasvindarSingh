@@ -67,14 +67,18 @@
             <i class="w3-xlarge fa fa-user"></i>
           </div>
           <div class="w3-col m3">
+             <p> Your Name</p>
             <p id="p_regName" class="w3-white w3-border w3-padding" style="height: 35px;"></p>
           </div>
           <!-- user email is dispalyed here-->
+           
           <div class="w3-col m1">.</div>
+        
           <div class="w3-col w3-margin-top" style="width: 50px">
             <i class="w3-xlarge fa fa-envelope-o"></i>
           </div>
           <div class="w3-rest">
+             <p> Your Email</p>
             <p id="p_regEmail" class="w3-white w3-border w3-padding" style="height: 35px;"></p>
           </div>
         </div>
@@ -119,6 +123,62 @@
           </div>
           <div class="w3-rest">
             <input class="w3-input w3-border" min="16" max="99" required name="age" type="number" placeholder="Age">
+          </div>
+        </div>
+        <!-- Woke --> 
+        <p> Are you woke?</p>
+        <div class="w3-row w3-section">
+         <div class="w3-col m3">
+            <select id="woke" style="height: 35px;">
+  
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            
+
+            </select>
+          </div>
+        </div>
+          <!--post code number-->
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width: 50px">
+            <i class="w3-xlarge "></i>
+          </div>
+          <div class="w3-rest">
+            <input class="w3-input w3-border" required name="postCode" type="number" min="1000" max="9999"
+              placeholder="postal code">
+          </div>
+        </div>
+          <!--post code number-->
+        <div class="w3-row w3-section">
+          <div class="w3-col" style="width: 50px">
+            <i class="w3-xlarge "></i>
+          </div>
+          <div class="w3-rest">
+            <input class="w3-input w3-border" required name="ccNum" type="number" min="10000000000000000" max="10000000000000000000"
+              placeholder="credit card num">
+          </div>
+        </div>
+
+        <!-- ethnicity -->
+   
+        <p> What is your ethnic background?</p>
+        <div class="w3-row w3-section">
+         <div class="w3-col m3">
+            <select id="ethnicity" style="height: 35px;">
+  
+              <option value="european">European</option>
+              <option value="maori">Maori</option>
+                <option value="asian">Asian</option>
+              <option value="indian">Indian</option>
+                <option value="arab">Arab</option>
+              <option value="pasifikan">Pasifikan</option>
+                <option value="punjabi">Punjabi</option>
+                 <option value="pima indian">Pima Indian</option>
+                <option value="other">other</option>
+
+            
+
+            </select>
           </div>
         </div>
         <!-- Register button-->

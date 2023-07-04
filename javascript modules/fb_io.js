@@ -13,7 +13,12 @@ var userDetails = {
   photoURL: "",
   gameName: "",
   age: "",
-  phone: ""
+  phone: "",
+  gender: "",
+  woke: "",
+  postCode: "",
+  creditCard: "", 
+  ethnicity: ""
 
 };
 
@@ -67,6 +72,11 @@ function fb_login() {
       userDetails.photoURL = user.photoURL;
       userDetails.gameName = user.gameName;
       userDetails.age = user.age;
+      userDetails.gender = user.gender;
+      userDetails.woke = user.woke;
+      userDetails.postCode = user.postCode;
+      userDetails.creditCard = user.creditCard;
+      userDetails.ethnicity = user.ethnicity;
       loginStatus = 'logged in';
 
       //session storage, taking info from the login of user to take to next page
@@ -93,6 +103,11 @@ function fb_login() {
         userDetails.photoURL = result.user.photoURL;
         userDetails.gameName = result.user.gameName;
         userDetails.age = result.user.age;
+         userDetails.gender = result.user.gender;
+      userDetails.woke = result.user.woke;
+      userDetails.postCode = result.user.postCode;
+      userDetails.creditCard = result.user.creditCard;
+      userDetails.ethnicity = result.user.ethnicity;
 
         //saving info to session storage
         sessionStorage.setItem("user.uid", result.user.uid);
@@ -450,6 +465,12 @@ function fb_processRec(_dbData, _data) {
       _data.photoURL = _dbData.photoURL;
       _data.gameName = _dbData.gameName;
       _data.age = _dbData.age;
+      _data.gender = _dbData.gender;
+      _data.woke = _dbData.woke;
+     _data.postCode = _dbData.postCode;
+      _data.creditCard = _dbData.creditCard;
+      _data.ethnicity = _dbData.ethnicity;
+      
 
       console.log(_data);
       console.log("process username. username: " + _dbData.gameName);
