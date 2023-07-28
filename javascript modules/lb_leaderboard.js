@@ -3,6 +3,7 @@
 // lb_getLeaderboard.js
 // Written by Rasvindar Singh, Term 1 & 2 2023. 
 // Gets scores from 'Scores' and then resorts them from largest, displaying top 3 scores.
+//References: Nehan H helped explain it to me  
 /*----------------------------------------------------*/
 
 // leaderbord function --> retrieves score data from fb scores path and sorts out in order from highest to lowest 

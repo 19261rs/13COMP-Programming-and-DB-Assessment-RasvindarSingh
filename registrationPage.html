@@ -40,7 +40,7 @@
   <script defer src="/javascript modules/reg_manager.js"></script>
   <script defer src="/javascript modules/ad_manager.js"></script>
   <script defer src="/javascript modules/html_manager.js"></script>
-  <script defer src="/javascript modules/lg_managerV2.js"></script>
+  <script defer src="/javascript modules/lg_manager.js"></script>
 </head>
 
 <!--*************************************************************
@@ -49,39 +49,37 @@
 
 <body onload="html_load()">
   <p id="p_debug"></p>
-  <button onClick="ind_home()" type="button">Click Me to go home!</button>
 
-  <!-- session storage test button -->
-  <button onClick="sessionData()" type="button">Click Me to check session storage</button>
   <!--***********************************************************
 			REGISTRATION PAGE
   
   ************************************************************-->
   <section id="rg_registrationPage">
     <div class="w3-container w3-col s8 m6 l3 w3-small">
+      <div class="w3-row w3-section">
+        <div class="w3-col w3-margin-top" style="width: 50px">
+          <i class="w3-xlarge fa fa-user"></i>
+        </div>
+        <div class="w3-col m3">
+          <p> Your Name</p>
+          <p id="p_regName" class="w3-white w3-border w3-padding" style="height: 35px;"></p>
+        </div>
+        <!-- user email is dispalyed here-->
+
+        <div class="w3-col m1">.</div>
+
+        <div class="w3-col w3-margin-top" style="width: 50px">
+          <i class="w3-xlarge fa fa-envelope-o"></i>
+        </div>
+        <div class="w3-rest">
+          <p> Your Email</p>
+          <p id="p_regEmail" class="w3-white w3-border w3-padding" style="height: 35px;"></p>
+        </div>
+      </div>
       <form id="f_reg" onsubmit="return false;" class="w3-container w3-card-4 transparentBG">
         <h1 class="w3-center headFont">Register</h1>
 
-        <div class="w3-row w3-section">
-          <div class="w3-col w3-margin-top" style="width: 50px">
-            <i class="w3-xlarge fa fa-user"></i>
-          </div>
-          <div class="w3-col m3">
-             <p> Your Name</p>
-            <p id="p_regName" class="w3-white w3-border w3-padding" style="height: 35px;"></p>
-          </div>
-          <!-- user email is dispalyed here-->
-           
-          <div class="w3-col m1">.</div>
-        
-          <div class="w3-col w3-margin-top" style="width: 50px">
-            <i class="w3-xlarge fa fa-envelope-o"></i>
-          </div>
-          <div class="w3-rest">
-             <p> Your Email</p>
-            <p id="p_regEmail" class="w3-white w3-border w3-padding" style="height: 35px;"></p>
-          </div>
-        </div>
+
         <!-- user game name-->
         <div class="w3-row">
           <div class="w3-col" style="width: 50px">
@@ -125,20 +123,20 @@
             <input class="w3-input w3-border" min="16" max="99" required name="age" type="number" placeholder="Age">
           </div>
         </div>
-        <!-- Woke --> 
+        <!-- Woke -->
         <p> Are you woke?</p>
         <div class="w3-row w3-section">
-         <div class="w3-col m3">
+          <div class="w3-col m3">
             <select id="woke" style="height: 35px;">
-  
+
               <option value="yes">Yes</option>
               <option value="no">No</option>
-            
+
 
             </select>
           </div>
         </div>
-          <!--post code number-->
+        <!--post code number-->
         <div class="w3-row w3-section">
           <div class="w3-col" style="width: 50px">
             <i class="w3-xlarge "></i>
@@ -148,35 +146,35 @@
               placeholder="postal code">
           </div>
         </div>
-          <!--post code number-->
+        <!--credit code number-->
         <div class="w3-row w3-section">
           <div class="w3-col" style="width: 50px">
             <i class="w3-xlarge "></i>
           </div>
           <div class="w3-rest">
-            <input class="w3-input w3-border" required name="ccNum" type="number" min="10000000000000000" max="10000000000000000000"
+            <input class="w3-input w3-border" required name="ccNum" type="number" min="1000" max="100000"
               placeholder="credit card num">
           </div>
         </div>
 
         <!-- ethnicity -->
-   
+
         <p> What is your ethnic background?</p>
         <div class="w3-row w3-section">
-         <div class="w3-col m3">
+          <div class="w3-col m3">
             <select id="ethnicity" style="height: 35px;">
-  
+
               <option value="european">European</option>
               <option value="maori">Maori</option>
-                <option value="asian">Asian</option>
+              <option value="asian">Asian</option>
               <option value="indian">Indian</option>
-                <option value="arab">Arab</option>
+              <option value="arab">Arab</option>
               <option value="pasifikan">Pasifikan</option>
-                <option value="punjabi">Punjabi</option>
-                 <option value="pima indian">Pima Indian</option>
-                <option value="other">other</option>
+              <option value="punjabi">Punjabi</option>
+              <option value="pima indian">Pima Indian</option>
+              <option value="other">other</option>
 
-            
+
 
             </select>
           </div>

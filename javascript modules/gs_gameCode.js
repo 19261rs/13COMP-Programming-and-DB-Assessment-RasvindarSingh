@@ -115,7 +115,7 @@ function gs_startTime() {
       i_inputBox.style.display = "none";
       submit.style.display = "none";
       userStatus.innerHTML = "Waiting for other player...";
-      
+
 
     }
   }, 1000);
@@ -152,7 +152,7 @@ function gs_guessNumSubmit() {
     console.log("target num: " + targetNum);
 
     if (guessedNumInput == targetNum) {
- 
+
       console.log("You win");
       alert("You Win");
       //updating score and deleting rec
@@ -162,7 +162,7 @@ function gs_guessNumSubmit() {
       //fb_delRec(LOBBYDATA, sessionStorage.getItem("host.uid"));
       firebase.database().ref(LOBBYDATA + '/' + sessionStorage.getItem("host.uid")).remove(); // deleting lobby
       firebase.database().ref(LOBBYDATA + '/' + sessionStorage.getItem("host.uid")).onDisconnect().cancel();
-      
+
       //sending user home
       window.location.href = "lp_landingPage.html";
 
@@ -237,14 +237,14 @@ function gs_onDisconnect() {
       var discRefData = snapshot.val()
       console.log(discRefData);
       if (discRefData == "true") {
-                 firebase.database().ref(LOBBYDATA + '/' + HOSTFBKEY + '/' + "p2PlayerLeft").off();
+        firebase.database().ref(LOBBYDATA + '/' + HOSTFBKEY + '/' + "p2PlayerLeft").off();
 
         firebase.database().ref(LOBBYDATA + '/' + HOSTFBKEY + '/' + "hostLeft").off();
         alert("Player 2 has disconnected. You will be kicked.");
         LOBBYREF.remove(); // deleting lobby
         LOBBYREF.onDisconnect().cancel();
-        
-        
+
+
       }
 
     })
@@ -256,14 +256,14 @@ function gs_onDisconnect() {
       var discRefDataTwo = snapshot.val()
       console.log(discRefDataTwo);
       if (discRefDataTwo == "true") {
-                firebase.database().ref(LOBBYDATA + '/' + HOSTFBKEY + '/' + "hostLeft").off();
+        firebase.database().ref(LOBBYDATA + '/' + HOSTFBKEY + '/' + "hostLeft").off();
 
-         firebase.database().ref(LOBBYDATA + '/' + HOSTFBKEY + '/' + "p2PlayerLeft").off();
+        firebase.database().ref(LOBBYDATA + '/' + HOSTFBKEY + '/' + "p2PlayerLeft").off();
         alert("Player 1 has disconnected. You will be kicked.");
-         LOBBYREF.remove(); // deleting lobby
+        LOBBYREF.remove(); // deleting lobby
         LOBBYREF.onDisconnect().cancel();
-       
-        
+
+
       }
 
     })

@@ -5,7 +5,7 @@
 /*----------------------------------------------------*/
 
 //Global Variables 
- MODULENAME = "index.js";
+MODULENAME = "index.js";
 console.log('%c' + MODULENAME + ': ', 'color:blue;');
 
 /*----------------------------------------------------*/

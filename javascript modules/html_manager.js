@@ -5,7 +5,7 @@
 /*----------------------------------------------------*/
 
 //Global Vairable declaration
- MODULENAME = "html_manager.js";
+MODULENAME = "html_manager.js";
 console.log('%c' + MODULENAME + ': ', 'color:blue;');
 
 /*----------------------------------------------------*/
@@ -23,6 +23,9 @@ function html_load() {
   userDetails.photoURL = sessionStorage.getItem('user.photoURL')
   userDetails.name = sessionStorage.getItem('user.name')
   userDetails.gameName = sessionStorage.getItem('user.gameName')
+  // userDetails.gameName = sessionStorage.setItem("testgameName", storedgameName);
+
+
 }
 
 /*----------------------------------------------------*/
@@ -64,7 +67,7 @@ function html_admin() {
 // //button to go from lobby page to game page
 /*----------------------------------------------------*/
 function gp_lobbytoGameHost() {
-gs_readOnOne();
+  gs_readOnOne();
   window.location.href = "gp_gamePage.html"
 }
 

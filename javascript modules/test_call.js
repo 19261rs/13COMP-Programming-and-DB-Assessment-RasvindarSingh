@@ -1,5 +1,4 @@
 
-//NEED TO DO: RELOCATE EVERYTHING IN THIS MODULE TO THE APPROPRIATE ONE AND GET RID OF TEST_CALL.JS
 MODULENAME = "test_call.js";
 console.log('%c' + MODULENAME + ': ', 'color:blue;' );
 
@@ -23,11 +22,6 @@ var userScore = {
 var dbArray = [];
 
 const LOBBY = "lobbyData";
-
-
-
-
-
 
 
 /**************************************************************/
@@ -56,37 +50,6 @@ function readRec() {
 }
 
 /**************************************************************/
-
-
-
-/**************************************************************/
-// writeRec() - THIS MAKES IT WRITE 
-// Input event; called when user clicks WRITE A RECORD button
-// Write a record to firebase
-// Input:
-// Return:
-/**************************************************************/
-// function writeScore(_score) {
-//   console.log(BB);
-//   console.log(userDetails.uid);
-//   console.log(userDetails.gameName);
-//   console.log("writeScore test" + _score);
-//   if(_score > userScore.score) {
-//       console.log("new high score: "+_score);
-//       console.log("old high score: "+userScore.score);
-//       //set player's new high score
-//       userScore.score = _score;
-//       let details = {
-//         uid: userDetails.uid,
-//         score: _score,
-//         gameName: userDetails.gameName
-//       }
-//       fb_writeRec(BB, userDetails.uid, details);
-//     }
-// }
-
-
-
 
 /**************************************************************/
 //    END OF PROG

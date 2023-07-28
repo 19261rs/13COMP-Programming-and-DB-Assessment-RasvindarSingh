@@ -5,7 +5,7 @@
 // NOTE: uses a temperate literal
 /*----------------------------------------------------*/
 const LOBBYDATA = "lobbyData";
- MODULENAME = "html_buildLobby.js";
+MODULENAME = "html_buildLobby.js";
 console.log('%c' + MODULENAME + ': ', 'color: blue;');
 
 /*----------------------------------------------------*/
@@ -156,14 +156,14 @@ function html_getLobbyData() {
   const LOBBYDATA = "lobbyData";
   lobbyData = {
     p1Uid: sessionStorage.getItem("user.uid"),
-    p1gameName: sessionStorage.getItem("user.name"),
+    p1gameName: sessionStorage.getItem("user.gameName"),
     p1Wins: 0,
     p1Losses: 0,
     p1RecentGuess: 0,
     hostLeft: "false",
     join: 0,
     turn: 1
-   
+
   }
   console.table(lobbyData);
   fb_writeRec(LOBBYDATA, sessionStorage.getItem("user.uid"), lobbyData);
@@ -174,7 +174,7 @@ function html_getLobbyData() {
 function html_p2Join() {
 
   sessionStorage.setItem("p2.uid", userDetails.uid),
-    sessionStorage.setItem("p2.gameName", userDetails.name),
+    sessionStorage.setItem("p2.gameName", userDetails.gameName),
     console.log("this is player 2's gameName: " + sessionStorage.getItem("p2.gameName"));
   // sessionStorage.setItem("p2.wins", userDetails.wins),
   // sessionStorage.setItem("p2.losses", userDetails.losses),
@@ -193,19 +193,17 @@ function html_p2Update() {
 
     join: 1,
     p2Uid: sessionStorage.getItem("p2.uid"),
-    p2gameName: sessionStorage.getItem("p2.gameName"),
+    p2gameName: sessionStorage.getItem("user.gameName"),
     p2Wins: 0,
     p2Losses: 0,
     p2RecentGuess: 0,
     p2PlayerLeft: "false",
     hostLeft: "false",
     turn: 0,
-    // ranNum: parseInt(sessionStorage.getItem("gs_gameNum"), 10)
 
   }
 
-  // fb_lobbyUpdate(LOBBYDATA, sessionStorage.getItem("host.uid"), lobbyData);
-  // fb_lobbyUpdate(LOBBYDATA, userDetails.uid, lobbyData);
+
   html_hostUid = sessionStorage.getItem("host.uid");
   console.log(html_hostUid);
   fb_lobbyUpdate(LOBBYDATA, html_hostUid, lobbyData);

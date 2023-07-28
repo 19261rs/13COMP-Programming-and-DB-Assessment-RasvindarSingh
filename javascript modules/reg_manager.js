@@ -74,10 +74,15 @@ var storedWoke = userDetails.woke = reg_getFormItemValue("f_reg", 4);
  var storedPostCode =  userDetails.postCode = reg_getFormItemValue("f_reg", 5);
   var storedCreditCard = userDetails.creditCard = reg_getFormItemValue("f_reg", 6);
  var storedEthnicity =  userDetails.ethnicity = reg_getFormItemValue("f_reg", 7);
+
   
   console.log("reg_regDetailsEntered: form passed html validation - " +
     document.getElementById('f_reg').checkValidity());
 
+// session storaging reg game name 
+   sessionStorage.setItem("testgameName", storedgameName);
+  sessionStorage.setItem("user.gameName", storedgameName);
+  console.log("session storaging reg game name: " + storedgameName);
   // Only write record to DB if all the fom's input passed html validation
 
   if (document.getElementById('f_reg').checkValidity()) {
@@ -98,6 +103,8 @@ var storedWoke = userDetails.woke = reg_getFormItemValue("f_reg", 4);
 
     };
 
+    //ss
+
     // window.location.href="lp_landingPage.html";
 
 
@@ -107,17 +114,14 @@ var storedWoke = userDetails.woke = reg_getFormItemValue("f_reg", 4);
     fb_writeRec(DETAILS, sessionStorage.getItem("user.uid"), storedDetails);
     regToLanding.style.display = "block";
 
-    //creates scores path  
+    //creates scores path  after reg clicked
     var details = {
       uid: sessionStorage.getItem("user.uid"),
-      gameName: userDetails.name,
+      gameName:   sessionStorage.getItem("testgameName"),
       score: 0
 
     };
     fb_writeRec(SCORES, userDetails.uid, details);
-
-
-
 
   }
 }

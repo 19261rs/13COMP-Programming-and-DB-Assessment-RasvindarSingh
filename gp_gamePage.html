@@ -45,7 +45,7 @@
   <script defer src="/javascript modules/ad_manager.js"></script>
   <script defer src="/javascript modules/html_buildLobby.js"></script>
 
-  <script defer src="/javascript modules/lg_managerV2.js"></script>
+  <script defer src="/javascript modules/lg_manager.js"></script>
 </head>
 
 <!--*************************************************************
@@ -54,7 +54,7 @@
 
 <body onload="html_load(), gs_randomNumberGen(), gs_readOnOne(), gs_readOnPlayerSwitch(), gs_onDisconnect()">
   <p id="p_debug"></p>
-  <button onClick="ind_home()" type="button">Click Me to go home!</button>
+ 
   <!--**************************************************************************
   //  GAME PAGE
   *****************************************************************************-->
@@ -71,7 +71,7 @@
         <h3 id="userStatus"> </h3>
         <p id="p_gpuserName1"></p>
         <p id="timer"></p>
-        <form id="form_guess" type="number" min="1" max="2" onsubmit="return false;">
+        <form id="form_guess" type="number" minlength="1" maxlength="2" onsubmit="return false;">
           <input type="text" id="i_inputBox" name="lnumber2" placeholder="put in your guess" min = "1" max = "2"><br><br>
           <button id="submit" onclick="gs_guessNumSubmit()"> Submit number </button>
         </form>

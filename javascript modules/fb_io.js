@@ -17,7 +17,7 @@ var userDetails = {
   gender: "",
   woke: "",
   postCode: "",
-  creditCard: "", 
+  creditCard: "",
   ethnicity: ""
 
 };
@@ -84,6 +84,8 @@ function fb_login() {
       sessionStorage.setItem("user.email", user.email);
       sessionStorage.setItem("user.name", user.displayName);
       sessionStorage.setItem("user.photoURL", user.photoURL);
+
+
       fb_readRec(DETAILS, userDetails.uid, userDetails, fb_processRec);
 
       document.getElementById("loginStatus").innerHTML = "Login Status: " + loginStatus
@@ -103,17 +105,18 @@ function fb_login() {
         userDetails.photoURL = result.user.photoURL;
         userDetails.gameName = result.user.gameName;
         userDetails.age = result.user.age;
-         userDetails.gender = result.user.gender;
-      userDetails.woke = result.user.woke;
-      userDetails.postCode = result.user.postCode;
-      userDetails.creditCard = result.user.creditCard;
-      userDetails.ethnicity = result.user.ethnicity;
+        userDetails.gender = result.user.gender;
+        userDetails.woke = result.user.woke;
+        userDetails.postCode = result.user.postCode;
+        userDetails.creditCard = result.user.creditCard;
+        userDetails.ethnicity = result.user.ethnicity;
 
         //saving info to session storage
         sessionStorage.setItem("user.uid", result.user.uid);
         sessionStorage.setItem("user.email", result.user.email);
         sessionStorage.setItem("user.name", result.user.displayName);
         sessionStorage.setItem("user.photoURL", result.user.photoURL);
+
 
         loginStatus = 'logged in via popup';
         console.log('fb_login: status = ' + loginStatus);
@@ -150,29 +153,7 @@ function fb_writeRec(_path, _key, _data) {
   writeStatus = 'waiting';
   firebase.database().ref(_path + '/' + _key).set(_data);
 
-    // function(error) {
-      // if (error) {
-      //   writeStatus = 'failure';
-      //   console.log(error);
-      // }
-      // else {
-      //   writeStatus = "OK";
-      //   if (_path != "Scores") {
-      //     var details = {
-      //       uid: sessionStorage.getItem("user.uid"),
-      //       gameName: userDetails.name,
-      //       score: 0
-
-      //     };
-      //     fb_writeRec(BB, userDetails.uid, details);
-      //     writeStatus = "OK";
-      //   } else {
-
-
-
-      //   }
-    //   }
-    // });
+  
   console.log("fb_writeRec: exit");
 }
 
@@ -198,22 +179,7 @@ function fb_lobbyUpdate(_path, _key, _data) {
       }
       else {
         writeStatus = "OK";
-        // if (_path != "Scores") {
-        //   var details = {
-        //     uid: sessionStorage.getItem("user.uid"),
-        //     gameName: userDetails.name,
-        //     score: 0
 
-        //   };
-        //   fb_lobbyUpdate(BB, userDetails.uid, details);
-        //   writeStatus = "OK";
-        // }
-        // } else {
-
-        //   //    document.getElementById("pGameName").innerHTML = "Username: "+_data.gameName;
-        //   //    document.getElementById("pPreviousScore").innerHTML = "Your High score: "+_data.score;
-
-        // }
       }
     });
   console.log("fb_lobbyUpdate: exit")
@@ -227,7 +193,7 @@ function fb_scoresUpdate(_path, _key, _data) {
 
   //                           PATH  /  KEY 
   writeStatus = 'waiting';
-firebase.database().ref(_path + '/' + _key).update(_data,
+  firebase.database().ref(_path + '/' + _key).update(_data,
 
     function(error) {
       if (error) {
@@ -467,10 +433,10 @@ function fb_processRec(_dbData, _data) {
       _data.age = _dbData.age;
       _data.gender = _dbData.gender;
       _data.woke = _dbData.woke;
-     _data.postCode = _dbData.postCode;
+      _data.postCode = _dbData.postCode;
       _data.creditCard = _dbData.creditCard;
       _data.ethnicity = _dbData.ethnicity;
-      
+
 
       console.log(_data);
       console.log("process username. username: " + _dbData.gameName);
@@ -514,20 +480,20 @@ function fb_delRec(_path, _key) {
 }
 
 //updating score func, not actually writing it 
-function fb_updateScore(_path, _key, _data){
+function fb_updateScore(_path, _key, _data) {
   firebase.database().ref(_path + '/' + _key + '/' + _data).once("value", fb_processScoreUpdate)
 
   function fb_processScoreUpdate(snapshot) {
     if (snapshot.val() == null) {
       console.log("score is nothing");
-      
+
     } else {
       var fetchScore = snapshot.val();
       console.log("this is snapshot val = " + snapshot.val());
       fetchScore = fetchScore + 1;
       Scores = {
         score: fetchScore
-      
+
       }
       fb_scoresUpdate(SCORES, userDetails.uid, Scores);
     }
